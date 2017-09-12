@@ -8,7 +8,6 @@ import { Reaction, Logger } from "/server/api";
 export const StripeApi = {};
 StripeApi.methods = {};
 
-
 export const cardSchema = new SimpleSchema({
   number: { type: String },
   name: { type: String },
@@ -43,20 +42,25 @@ const expectedErrors = [
   "incorrect_number"
 ];
 
-StripeApi.methods.getApiKey = new ValidatedMethod({
-  name: "StripeApi.methods.getApiKey",
-  validate: null,
-  run() {
-    const stripePkg = Reaction.getPackageSettingsWithOptions({
-      shopId: Reaction.getPrimaryShopId(),
-      name: "reaction-stripe"
-    });
-    if (stripePkg || stripePkg.settings && stripePkg.settings.api_key) {
-      return stripePkg.settings.api_key;
-    }
-    throw new Meteor.Error("access-denied", "Invalid Stripe Credentials");
+/**
+ * StripeApi.getApiKey
+ * Get the Stripe API key from the database
+ * @return {String|null} returns the API key if configured, else null
+ */
+StripeApi.getApiKey = () => {
+  const stripePkg = Reaction.getPackageSettingsWithOptions({
+    shopId: Reaction.getPrimaryShopId(),
+    name: "reaction-stripe"
+  });
+
+  if (stripePkg || stripePkg.settings && stripePkg.settings.api_key) {
+    return stripePkg.settings.api_key;
   }
-});
+
+  Logger.warn("Stripe API key not found");
+
+  return null;
+};
 
 
 StripeApi.methods.createCharge = new ValidatedMethod({
@@ -68,7 +72,10 @@ StripeApi.methods.createCharge = new ValidatedMethod({
   run({ chargeObj, apiKey }) {
     let stripe;
     if (!apiKey) {
-      const dynamicApiKey = StripeApi.methods.getApiKey.call();
+      const dynamicApiKey = StripeApi.getApiKey();
+      if (!dynamicApiKey) {
+        throw new Meteor.Error("payment-method-error", "Payment method not configured");
+      }
       stripe = require("stripe")(dynamicApiKey);
     } else {
       stripe = require("stripe")(apiKey);
@@ -86,8 +93,7 @@ StripeApi.methods.createCharge = new ValidatedMethod({
         };
         return { error: normalizedError, result: null };
       }
-      Logger.error("Received unexpected error type: " + e.rawType);
-      Logger.error(e);
+      Logger.error(e, "Received unexpected error type: " + e.rawType);
 
       // send raw error to server log, but sanitized version to client
       const sanitisedError = {
@@ -108,7 +114,10 @@ StripeApi.methods.captureCharge = new ValidatedMethod({
   run({ transactionId, captureDetails, apiKey })  {
     let stripe;
     if (!apiKey) {
-      const dynamicApiKey = StripeApi.methods.getApiKey.call();
+      const dynamicApiKey = StripeApi.getApiKey();
+      if (!dynamicApiKey) {
+        throw new Meteor.Error("payment-method-error", "Payment method not configured");
+      }
       stripe = require("stripe")(dynamicApiKey);
     } else {
       stripe = require("stripe")(apiKey);
@@ -128,7 +137,10 @@ StripeApi.methods.createRefund = new ValidatedMethod({
   run({ refundDetails, apiKey }) {
     let stripe;
     if (!apiKey) {
-      const dynamicApiKey = StripeApi.methods.getApiKey.call();
+      const dynamicApiKey = StripeApi.getApiKey();
+      if (!dynamicApiKey) {
+        throw new Meteor.Error("payment-method-error", "Payment method not configured");
+      }
       stripe = require("stripe")(dynamicApiKey);
     } else {
       stripe = require("stripe")(apiKey);
@@ -148,7 +160,10 @@ StripeApi.methods.listRefunds = new ValidatedMethod({
   run({ transactionId, apiKey }) {
     let stripe;
     if (!apiKey) {
-      const dynamicApiKey = StripeApi.methods.getApiKey.call();
+      const dynamicApiKey = StripeApi.getApiKey();
+      if (!dynamicApiKey) {
+        throw new Meteor.Error("payment-method-error", "Payment method not configured");
+      }
       stripe = require("stripe")(dynamicApiKey);
     } else {
       stripe = require("stripe")(apiKey);
