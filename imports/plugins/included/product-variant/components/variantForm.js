@@ -45,10 +45,10 @@ class VariantForm extends Component {
 
     this.state = {
       expandedCard: props.editFocus,
-      variant: props.variant,
+      inventoryManagement: props.variant.inventoryManagement,
       inventoryPolicy: props.variant.inventoryPolicy,
       taxable: props.variant.taxable,
-      inventoryManagement: props.variant.inventoryManagement
+      variant: props.variant
     };
   }
 
@@ -303,6 +303,14 @@ class VariantForm extends Component {
     );
   }
 
+  renderVariantMedia() {
+    return (
+      <Components.VariantMedia
+        variant={this.variant}
+      />
+    );
+  }
+
   renderVariantFields() {
     const cardName = `variant-${this.variant._id}`;
 
@@ -341,6 +349,7 @@ class VariantForm extends Component {
             {this.renderArchiveButton()}
           </Components.CardHeader>
           <Components.CardBody expandable={true}>
+            {this.renderVariantMedia()}
             <Components.TextField
               i18nKeyLabel="productVariant.title"
               i18nKeyPlaceholder="productVariant.title"
@@ -582,6 +591,7 @@ class VariantForm extends Component {
             {this.renderArchiveButton()}
           </Components.CardHeader>
           <Components.CardBody expandable={true}>
+            {this.renderVariantMedia()}
             <Components.TextField
               i18nKeyLabel="productVariant.optionTitle"
               i18nKeyPlaceholder="productVariant.optionTitle"

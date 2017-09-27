@@ -1,0 +1,57 @@
+.variant-media {
+  margin-top: @padding-large-horizontal;
+  margin-bottom: @padding-large-horizontal;
+
+  .variant-images {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 0px;
+  }
+
+  .variant-images > li {
+    flex: 0 0 25%;
+    position: relative;
+  }
+
+  .variant-images > li > img {
+    width: 100%;
+    height: 100%;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+
+  .variant-images > li > button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  .upload-media-dropzone {
+    background: @black05;
+    color: @rui-default-text;
+    padding: @padding-large-vertical;
+    display: flex;
+    padding: calc(@padding-large-vertical*2) calc(@padding-large-horizontal*2);
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      .upload-media-icon {
+        color: @rui-brand;
+      }
+    }
+
+  }
+
+  .upload-media-dropzone.isMedia {
+    padding: 5px calc(@padding-large-horizontal*2);
+  }
+
+  .upload-media-icon {
+    font-size: 32px;
+    .margin-right(10px);
+  }
+
+}

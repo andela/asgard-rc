@@ -14,7 +14,8 @@
         },
         "tooltip": {
           "validationError": "Validation error"
-        }
+        },
+        "uploadMedia": "Drag and drop your files here"
       },
       "productGrid": {
         "noProductsFound": "No products found"

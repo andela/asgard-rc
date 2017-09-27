@@ -30,6 +30,7 @@ export { default as ProductGridItems } from "../components/productGridItems";
 export { default as Products } from "../components/products";
 export { default as VariantForm } from "../components/variantForm";
 export { default as VariantEdit } from "../components/variantEdit";
+export { default as VariantMedia } from "../components/variantMedia";
 
 export { default as GridItemControlsContainer } from "../containers/gridItemControlsContainer";
 export { default as GridItemNoticeContainer } from "../containers/gridItemNoticeContainer";
@@ -39,3 +40,4 @@ export { default as ProductGridItemsContainer } from "../containers/productGridI
 export { default as ProductsContainer } from "../containers/productsContainer";
 export { default as VariantFormContainer } from "../containers/variantFormContainer";
 export { default as VariantEditContainer } from "../containers/variantEditContainer";
+export { default as VariantMediaContainer } from "../containers/variantMediaContainer";
