@@ -1,4 +1,4 @@
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 import { TaxPackageConfig } from "/imports/plugins/core/taxes/lib/collections/schemas";
 
 /**
@@ -73,7 +73,12 @@ export const AvalaraPackageConfig = new SimpleSchema([
     },
     "settings.addressValidation.countryList": {
       label: "Enable Address Validation by Country",
-      type: [String],
+      type: Array,
+      optional: true
+    },
+    "settings.addressValidation.countryList.$": {
+      label: "Enable Address Validation by Country",
+      type: String,
       optional: true
     }
   }

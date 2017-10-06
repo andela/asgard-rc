@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { Meteor } from "meteor/meteor";
 import { check, Match } from "meteor/check";
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 import { Products, Shops, Revisions } from "/lib/collections";
 import { Reaction, Logger } from "/server/api";
 import { RevisionApi } from "/imports/plugins/core/revisions/lib/api/revisions";
@@ -13,11 +13,19 @@ import { findProductMedia } from "./product";
 //
 const filters = new SimpleSchema({
   "shops": {
-    type: [String],
+    type: Array,
+    optional: true
+  },
+  "shops.$": {
+    type: String,
     optional: true
   },
   "tags": {
-    type: [String],
+    type: Array,
+    optional: true
+  },
+  "tags.$": {
+    type: String,
     optional: true
   },
   "query": {

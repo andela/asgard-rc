@@ -1,4 +1,4 @@
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 import { PackageConfig } from "/lib/collections/schemas/registry";
 import { Taxes } from "./taxes";
 
@@ -30,7 +30,11 @@ export const TaxPackageConfig = new SimpleSchema([
       defaultValue: false
     },
     "settings.rates.taxes": {
-      type: [Taxes],
+      type: Array,
+      optional: true
+    },
+    "settings.rates.taxes.$": {
+      type: Taxes,
       optional: true
     }
   }

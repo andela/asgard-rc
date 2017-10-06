@@ -1,5 +1,5 @@
 /* eslint camelcase: 0 */
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 
 export const addressSchema = new SimpleSchema({
   object_purpose: { type: String, allowedValues: ["QUOTE", "PURCHASE"] },

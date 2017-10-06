@@ -1,4 +1,4 @@
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 import { PackageConfig } from "/lib/collections/schemas/registry";
 import { Discounts } from "./discounts";
 
@@ -18,7 +18,11 @@ export const DiscountsPackageConfig = new SimpleSchema([
       defaultValue: false
     },
     "settings.rates.discounts": {
-      type: [Discounts],
+      type: Array,
+      optional: true
+    },
+    "settings.rates.discounts.$": {
+      type: Discounts,
       optional: true
     }
   }

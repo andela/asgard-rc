@@ -1,8 +1,8 @@
+import SimpleSchema from "simpl-schema"; // TODO: Update this file for node simpl-schema
 import i18next from "i18next";
 import moment from "moment";
 import { Meteor } from "meteor/meteor";
 import { Tracker } from "meteor/tracker";
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
 import { Reaction } from "/client/api";
 import { Shops } from "/lib/collections";
 

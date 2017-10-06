@@ -1,4 +1,4 @@
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 import { DiscountsPackageConfig } from "/imports/plugins/core/discounts/lib/collections/schemas";
 
 /**

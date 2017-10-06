@@ -1,31 +1,36 @@
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 import { PackageConfig } from "/lib/collections/schemas/registry";
 
 const Webhook = new SimpleSchema({
-  shopifyId: {
+  "shopifyId": {
     type: Number,
     label: "Shopify webhook ID",
     decimal: false
   },
-  topic: {
+  "topic": {
     type: String,
     label: "Shopify webhook topic"
   },
-  address: {
+  "address": {
     type: String,
     label: "URL webhook will POST to"
   },
-  format: {
+  "format": {
     type: String,
     label: "Format of webhook data"
   },
-  integrations: {
-    type: [String],
+  "integrations": {
+    type: Array,
+    label: "Integrations currently using this webhook",
+    optional: true
+  },
+  "integrations.$": {
+    type: String,
     label: "Integrations currently using this webhook",
     optional: true
   },
   // Currently unused, might want it later
-  description: {
+  "description": {
     type: String,
     label: "Shopify webhook description",
     optional: true
@@ -55,7 +60,12 @@ export const ShopifyConnectPackageConfig = new SimpleSchema([
       optional: true
     },
     "settings.webhooks": {
-      type: [Webhook],
+      type: Array,
+      label: "Registered Shopify webhooks",
+      optional: true
+    },
+    "settings.webhooks.$": {
+      type: Webhook,
       label: "Registered Shopify webhooks",
       optional: true
     }

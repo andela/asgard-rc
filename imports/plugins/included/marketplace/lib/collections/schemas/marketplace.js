@@ -1,4 +1,4 @@
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 import { PackageConfig } from "/lib/collections/schemas/registry";
 import { Shop } from "/lib/collections/schemas/shops.js";
 
@@ -14,11 +14,14 @@ export const ShopTypes = new SimpleSchema({
 });
 
 export const EnabledPackagesByShopType = new SimpleSchema({
-  shopType: {
+  "shopType": {
     type: String
   },
-  enabledPackages: {
-    type: [String]
+  "enabledPackages": {
+    type: Array
+  },
+  "enabledPackages.$": {
+    type: String
   }
 });
 
@@ -30,7 +33,7 @@ export const MarketplacePackageConfig = new SimpleSchema([
       optional: true
     },
     "settings.shops.enabledShopTypes": {
-      type: [ShopTypes],
+      type: Array,
       defaultValue: [{
         shopType: "merchant",
         active: true
@@ -39,8 +42,15 @@ export const MarketplacePackageConfig = new SimpleSchema([
         active: false
       }]
     },
+    "settings.shops.enabledShopTypes.$": {
+      type: ShopTypes
+    },
     "settings.shops.enabledPackagesByShopTypes": {
-      type: [EnabledPackagesByShopType],
+      type: Array,
+      optional: true
+    },
+    "settings.shops.enabledPackagesByShopTypes.$": {
+      type: EnabledPackagesByShopType,
       optional: true
     },
     "settings.payoutMethod": {
@@ -79,23 +89,11 @@ export const MarketplacePackageConfig = new SimpleSchema([
       type: Boolean,
       defaultValue: false
     },
-    // if true, each merchant sets their own currency
-    // TODO: REMOVE in favor of merchantLocale
-    // "settings.public.merchantCurrency": {
-    //   type: Boolean,
-    //   defaultValue: false
-    // },
     // if true, each merchant performs their own fulfillment
     "settings.public.merchantFulfillment": {
       type: Boolean,
       defaultValue: true
     },
-    // if true, each merchant sets their own language
-    // // TODO: REMOVE in favor of merchantLocale
-    // "settings.public.merchantLanguage": { // DEPRECATED
-    //   type: Boolean,
-    //   defaultValue: false
-    // },
     // if true, each merchant sets their own locale, language, and currency
     "settings.public.merchantLocale": {
       type: Boolean,

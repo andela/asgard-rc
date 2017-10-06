@@ -1,4 +1,4 @@
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 import { Templates } from "/lib/collections";
 import { shopIdAutoValue } from "/lib/collections/schemas/helpers";
 
@@ -7,73 +7,77 @@ import { shopIdAutoValue } from "/lib/collections/schemas/helpers";
 */
 
 export const EmailTemplates = new SimpleSchema({
-  shopId: {
+  "shopId": {
     type: String,
     index: 1,
     autoValue: shopIdAutoValue,
     label: "Template ShopId"
   },
-  name: {
+  "name": {
     type: String,
     optional: true
   },
-  priority: {
+  "priority": {
     type: Number,
     optional: true,
     defaultValue: 1
   },
-  enabled: {
+  "enabled": {
     type: Boolean,
     defaultValue: true
   },
-  route: {
+  "route": {
     type: String,
     optional: true
   },
-  audience: {
-    type: [String],
+  "audience": {
+    type: Array,
     optional: true
   },
-  type: {
+  "audience.$": {
+    type: String,
+    optional: true
+  },
+  "type": {
     type: String,
     defaultValue: "email",
     optional: true
   },
-  provides: {
+  "provides": {
     type: String,
     defaultValue: "template"
   },
-  block: {
+  "block": {
     type: String,
     optional: true
   },
-  defaultData: {
+  "defaultData": {
     type: Object,
     blackbox: true,
     optional: true
   },
-  template: {
+  "template": {
     type: String,
     optional: true
   },
-  parser: {
+  "parser": {
     type: String,
     optional: true
   },
-  language: {
+  "language": {
     type: String,
     optional: true,
     defaultValue: "en"
   },
-  source: {
+  "source": {
     type: String,
     optional: true
   },
-  title: {
+  "title": {
     type: String,
     optional: true
   },
-  subject: {
+  "subject": {
     type: String,
     optional: true
   }

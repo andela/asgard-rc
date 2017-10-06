@@ -1,4 +1,4 @@
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 import { shopIdAutoValue } from "/lib/collections/schemas/helpers";
 
 // The Discounts Schema validates using multiple schemas
@@ -55,7 +55,11 @@ export const Discounts = new SimpleSchema({
     optional: true
   },
   "transactions": {
-    type: [Transactions],
+    type: Array,
+    optional: true
+  },
+  "transactions.$": {
+    type: Transactions,
     optional: true
   },
   "calculation": {
@@ -106,22 +110,42 @@ export const Discounts = new SimpleSchema({
     optional: true
   },
   "conditions.audience": {
-    type: [String],
+    type: Array,
+    optional: true,
+    label: "Audience"
+  },
+  "conditions.audience.$": {
+    type: String,
     optional: true,
     label: "Audience"
   },
   "conditions.permissions": {
-    type: [String],
+    type: Array,
+    optional: true,
+    label: "Permissions"
+  },
+  "conditions.permissions.$": {
+    type: String,
     optional: true,
     label: "Permissions"
   },
   "conditions.products": {
-    type: [String],
+    type: Array,
+    optional: true,
+    label: "Products"
+  },
+  "conditions.products.$": {
+    type: String,
     optional: true,
     label: "Products"
   },
   "conditions.tags": {
-    type: [String],
+    type: Array,
+    optional: true,
+    label: "Tags"
+  },
+  "conditions.tags.$": {
+    type: String,
     optional: true,
     label: "Tags"
   }

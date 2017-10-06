@@ -1,4 +1,4 @@
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 import { TaxPackageConfig } from "/imports/plugins/core/taxes/lib/collections/schemas";
 
 /**

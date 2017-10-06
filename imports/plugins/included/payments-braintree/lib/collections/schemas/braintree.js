@@ -1,4 +1,4 @@
-import { SimpleSchema } from "meteor/aldeed:simple-schema";
+import SimpleSchema from "simpl-schema";
 import { PackageConfig } from "/lib/collections/schemas/registry";
 
 /**
@@ -70,4 +70,3 @@ export const BraintreePayment = new SimpleSchema({
     label: "CVV"
   }
 });
-
