@@ -23,7 +23,6 @@ class SearchModal extends Component {
   }
 
   renderSearchInput() {
-    console.log("message");
     return (
       <div className="rui search-modal-input">
         <label data-i18n="search.searchInputLabel">Search {this.props.siteName}</label>
