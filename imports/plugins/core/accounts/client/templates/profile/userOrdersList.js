@@ -1,19 +1,47 @@
-import moment from "moment";
 import { Template } from "meteor/templating";
-import { Orders, Shops } from "/lib/collections";
-import { Reaction } from "/client/api";
+import { Orders, Media } from "/lib/collections";
 import CompletedOrder from "/imports/plugins/core/checkout/client/components/completedOrder";
+
+/**
+ * @method handleDisplayMedia
+ * @summary gets the image of an order variant
+ * @param {object} order - order from which variant is gotten
+ * @since 1.5.0
+ * @return {func} handleDisplayMedia - function to be passed a props to
+ * CompletedOrder component
+ */
+function handleDisplayMedia(order) {
+  return () => {
+    const item = order.items[0];
+    const variantId = item.variants._id;
+    const productId = item.productId;
+
+    const variantImage = Media.findOne({
+      "metadata.variantId": variantId,
+      "metadata.productId": productId
+    });
+
+    if (variantImage) {
+      return variantImage;
+    }
+
+    const defaultImage = Media.findOne({
+      "metadata.productId": productId,
+      "metadata.priority": 0
+    });
+
+    if (defaultImage) {
+      return defaultImage;
+    }
+    return false;
+  };
+}
 
 /**
  * userOrdersList helpers
  *
  */
 Template.userOrdersList.helpers({
-  orderStatus() {
-    if (this.workflow.status === "coreOrderCompleted") {
-      return true;
-    }
-  },
   orders(data) {
     if (data.hash.data) {
       return data.hash.data;
@@ -26,70 +54,29 @@ Template.userOrdersList.helpers({
     });
     return orders;
   },
-  orderAge() {
-    return moment(this.createdAt).fromNow();
-  },
-  shipmentTracking() {
-    const shippingObject = this.shipping.find((shipping) => {
-      return shipping.shopId === Reaction.getShopId();
-    });
-    return shippingObject.shipmentMethod.tracking;
-  },
-  shopName() {
-    const shop = Shops.findOne(this.shopId);
-    return shop !== null ? shop.name : void 0;
-  },
+
+  // Returns React Component
   completedOrder() {
-    return { component: CompletedOrder };
-  },
-  orderSummary() {
-    const instance = Template.instance();
-    // const order = instance.state.get("order");
-    console.log("instance:order: ", instance);
-    // const orderSummary = {
-    //   quantityTotal: order.getCount(),
-    //   subtotal: order.getSubTotal(),
-    //   shippingTotal: order.getShippingTotal(),
-    //   tax: order.getTaxTotal(),
-    //   discounts: order.getDiscounts(),
-    //   total: order.getTotal(),
-    //   shipping: order.shipping
-    // };
-    // console.log("orderSummary: ", orderSummary);
-    return {
-      quantityTotal: 10,
-      subtotal: 10,
-      shippingTotal: 10,
-      tax: 0,
-      discounts: 0,
-      total: 20,
-      shipping: 10
+    const order = this;
+    const orderId = order._id;
+    const orderSummary = {
+      quantityTotal: order.getCount(),
+      subtotal: order.getSubTotal(),
+      shippingTotal: order.getShippingTotal(),
+      tax: order.getTaxTotal(),
+      discounts: order.getDiscounts(),
+      total: order.getTotal(),
+      shipping: order.shipping
     };
-  },
-  handleDisplayMedia() {
-    const instance = Template.instance();
-    // const order = instance.state.get("order");
-    // const variantId = item.variants._id;
-    // const productId = item.productId;
-
-    // const variantImage = Collections.Media.findOne({
-    //   "metadata.variantId": variantId,
-    //   "metadata.productId": productId
-    // });
-
-    // if (variantImage) {
-    //   return variantImage;
-    // }
-
-    // const defaultImage = Collections.findOne({
-    //   "metadata.productId": productId,
-    //   "metadata.priority": 0
-    // });
-
-    // if (defaultImage) {
-    //   return defaultImage;
-    // }
-    console.log("order:items: ", instance);
-    return false;
+    const paymentMethods = order.getUniquePaymentMethods();
+    const shops = order.getShopSummary();
+    return { component: CompletedOrder,
+      handleDisplayMedia: handleDisplayMedia(order),
+      order: order,
+      orderId: orderId,
+      orderSummary: orderSummary,
+      paymentMethods: paymentMethods,
+      shops: shops
+    };
   }
 });
