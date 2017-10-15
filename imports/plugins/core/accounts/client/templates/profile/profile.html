@@ -1,20 +1,16 @@
 <template name="accountProfile">
-
   <div class="flex flex-column flex-align-center flex-2x container-lg">
-
     <div class="flex-item">
       <div class="panel panel-lg">
-
         <div class="panel-heading  panel-title-center">
-
             <div class="profile-image">
               <div>
                 {{> React ReactionAvatar }}
               </div>
               <span class="profile-image-display-name">{{displayName}}</span>
             </div>
-
         </div>
+
         <div class="panel-content">
           {{> React UpdateEmail }}
         </div>
@@ -23,17 +19,14 @@
             {{> loginFormChangePassword}}
           {{/if}}
         </div>
-
       </div>
     </div>
-
 
     <div class="flex-item">
       <div class="panel panel-default user-orders-list">
         <div class="panel-heading">
           <h3 class="panel-title" data-i18n="accountsUI.yourOrders">Your Orders</h3>
         </div>
-
         <div class="panel-content">
           {{> userOrdersList data=userOrders}}
         </div>
@@ -44,14 +37,12 @@
     <div class="flex-item">
       {{> addressBookPanel}}
     </div>
-
     {{#if showMerchantSignup }}
       <div class="flex-item">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title" data-i18n="marketplace.becomeSeller">Become a Seller</h3>
           </div>
-
           <div class="panel-content">
             {{> becomeSellerButton}}
           </div>
@@ -59,5 +50,4 @@
       </div>
     {{/if}}
   </div>
-
 </template>
