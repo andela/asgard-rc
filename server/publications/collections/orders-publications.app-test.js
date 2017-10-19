@@ -36,7 +36,8 @@ describe("Order Publication", function () {
     // if you want to do a real stress test, you could try to comment out
     // this spyOn lines. This is needed only for ./reaction test. In one
     // package test this is ignoring.
-    if (Array.isArray(Collections.Products._hookAspects.remove.after) && Collections.Products._hookAspects.remove.after.length) {
+    if (Array.isArray(Collections.Products._hookAspects.remove.after) &&
+      Collections.Products._hookAspects.remove.after.length) {
       productRemoveStub = sinon.stub(Collections.Products._hookAspects.remove.after[0], "aspect");
       productInsertStub = sinon.stub(Collections.Products._hookAspects.insert.after[0], "aspect");
     }

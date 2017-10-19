@@ -434,7 +434,12 @@ Meteor.methods({
     let parcel = null;
     if (immediateAncestor) {
       if (immediateAncestor.weight || immediateAncestor.height || immediateAncestor.width || immediateAncestor.length) {
-        parcel = { weight: immediateAncestor.weight, height: immediateAncestor.height, width: immediateAncestor.width, length: immediateAncestor.length };
+        parcel = {
+          weight: immediateAncestor.weight,
+          height: immediateAncestor.height,
+          width: immediateAncestor.width,
+          length: immediateAncestor.length
+        };
       }
     }
     // if it's set at the option level then that overrides

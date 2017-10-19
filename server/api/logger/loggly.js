@@ -18,7 +18,8 @@ class Bunyan2Loggly {
 
   write(data) {
     if (typeof data !== "object") {
-      throw new Error("bunyan-loggly requires a raw stream. Please define the type as raw when setting up the bunyan stream.");
+      throw new Error("bunyan-loggly requires a raw stream." +
+        "Please define the type as raw when setting up the bunyan stream.");
     }
 
     // loggly prefers timestamp over time

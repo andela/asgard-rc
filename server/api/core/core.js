@@ -107,7 +107,9 @@ export default {
         const groupExists = allGroups.find(grp => grp.slug === groupKeys && grp.shopId === shop._id);
         if (!groupExists) { // create group only if it doesn't exist before
           // get roles from the default groups of the primary shop; we try to use this first before using default roles
-          const primaryShopGroup = allGroups.find(grp => grp.slug === groupKeys && grp.shopId === self.getPrimaryShopId());
+          const primaryShopGroup = allGroups.find(grp =>
+            grp.slug === groupKeys && grp.shopId === self.getPrimaryShopId()
+          );
           Logger.debug(`creating group ${groupKeys} for shop ${shop.name}`);
           Groups.insert({
             name: groupKeys,

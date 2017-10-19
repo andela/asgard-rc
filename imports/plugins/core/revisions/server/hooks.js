@@ -280,7 +280,9 @@ Products.before.insert((userId, product) => {
     return true;
   }
 
-  if (product.workflow && Array.isArray(product.workflow.workflow) && product.workflow.workflow.indexOf("imported") !== -1) {
+  if (product.workflow &&
+    Array.isArray(product.workflow.workflow) &&
+    product.workflow.workflow.indexOf("imported") !== -1) {
     // Mark imported products as published by default.
     return true;
   }
@@ -315,7 +317,8 @@ Products.before.insert((userId, product) => {
     }).count();
 
     if (archivedCount > 0) {
-      Logger.debug(`Cannot create product ${product._id} as a product/variant higher in it's ancestors tree is marked as 'isDeleted'.`);
+      Logger.debug(`Cannot create product ${product._id}
+      as a product/variant higher in it's ancestors tree is marked as 'isDeleted'.`);
       throw new Meteor.Error("Unable to create product variant");
     }
   }
@@ -369,7 +372,8 @@ Products.before.update(function (userId, product, fieldNames, modifier, options)
     }).count();
 
     if (archivedCount > 0) {
-      Logger.debug(`Cannot restore product ${product._id} as a product/variant higher in it's ancestors tree is marked as 'isDeleted'.`);
+      Logger.debug(`Cannot restore product ${product._id} as a product/variant higher
+      in it's ancestors tree is marked as 'isDeleted'.`);
       throw new Meteor.Error("Unable to delete product variant");
     }
   }

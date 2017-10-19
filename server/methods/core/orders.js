@@ -446,7 +446,8 @@ export const methods = {
 
     if (workflowResult === 1) {
       // Move to completed status for items
-      completedItemsResult = Meteor.call("workflow/pushItemWorkflow", "coreOrderItemWorkflow/completed", order, itemIds);
+      completedItemsResult = Meteor.call("workflow/pushItemWorkflow",
+        "coreOrderItemWorkflow/completed", order, itemIds);
 
       if (completedItemsResult === 1) {
         // Then try to mark order as completed.
@@ -1036,7 +1037,8 @@ export const methods = {
       };
 
       if (result.saved === false) {
-        Logger.fatal("Attempt for de-authorize transaction failed", order._id, paymentMethod.transactionId, result.error);
+        Logger.fatal("Attempt for de-authorize transaction failed",
+          order._id, paymentMethod.transactionId, result.error);
         throw new Meteor.Error("Attempt to de-authorize transaction failed", result.error);
       }
     } else if (orderMode === "capture") {

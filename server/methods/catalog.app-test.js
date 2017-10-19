@@ -67,7 +67,10 @@ describe("core product methods", function () {
       expect(variants.length).to.equal(1);
 
       const insertProductSpy = sandbox.spy(Products, "insert");
-      expect(() => Meteor.call("products/cloneVariant", product._id, variants[0]._id)).to.throw(Meteor.Error, /Access Denied/);
+      expect(() => Meteor.call("products/cloneVariant",
+        product._id,
+        variants[0]._id)
+      ).to.throw(Meteor.Error, /Access Denied/);
       expect(insertProductSpy).to.not.have.been.called;
     });
 
@@ -552,7 +555,10 @@ describe("core product methods", function () {
       const product = addProduct();
       const updateProductSpy = sandbox.spy(Products, "update");
       const insertTagsSpy = sandbox.spy(Tags, "insert");
-      expect(() => Meteor.call("products/updateProductTags", product._id, "productTag", null)).to.throw(Meteor.Error, /Access Denied/);
+      expect(() => Meteor.call("products/updateProductTags",
+        product._id,
+        "productTag",
+        null)).to.throw(Meteor.Error, /Access Denied/);
       expect(updateProductSpy).to.not.have.been.called;
       expect(insertTagsSpy).to.not.have.been.called;
     });
@@ -643,7 +649,10 @@ describe("core product methods", function () {
       const tag = Factory.create("tag");
       const updateProductSpy = sandbox.spy(Products, "update");
       const removeTagsSpy = sandbox.spy(Tags, "remove");
-      expect(() => Meteor.call("products/removeProductTag", product._id, tag._id)).to.throw(Meteor.Error, /Access Denied/);
+      expect(() => Meteor.call("products/removeProductTag",
+        product._id,
+        tag._id)
+      ).to.throw(Meteor.Error, /Access Denied/);
       expect(updateProductSpy).to.not.have.been.called;
       expect(removeTagsSpy).to.not.have.been.called;
     });

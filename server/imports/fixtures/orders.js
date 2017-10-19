@@ -155,7 +155,9 @@ export default function () {
         method: "credit",
         processor: "Example",
         storedCard: "Mastercard 2346",
-        paymentPackageId: getPkgData("example-paymentmethod") ? getPkgData("example-paymentmethod")._id : "uiwneiwknekwewe",
+        paymentPackageId: getPkgData("example-paymentmethod") ?
+          getPkgData("example-paymentmethod")._id :
+          "uiwneiwknekwewe",
         paymentSettingsKey: "example-paymentmethod",
         mode: "authorize",
         status: "created",

@@ -192,7 +192,8 @@ function compareAddress(address, validationAddress) {
     errors.totalErrors++;
   }
 
-  if (address.address2 && validationAddress.address2 && _.trim(_.upperCase(address.address2)) !== _.trim(_.upperCase(validationAddress.address2))) {
+  if (address.address2 && validationAddress.address2 &&
+    _.trim(_.upperCase(address.address2)) !== _.trim(_.upperCase(validationAddress.address2))) {
     errors.address2.push("Address line 2 did not validate");
     errors.totalErrors++;
   }
@@ -216,32 +217,38 @@ function compareAddress(address, validationAddress) {
     errors.totalErrors++;
   }
   // second check if both fields exist, but they don't match (which almost always happen for certain fields on first time)
-  if (validationAddress.address1 && address.address1 && _.trim(_.upperCase(address.address1)) !== _.trim(_.upperCase(validationAddress.address1))) {
+  if (validationAddress.address1 && address.address1 &&
+    _.trim(_.upperCase(address.address1)) !== _.trim(_.upperCase(validationAddress.address1))) {
     errors.address1.push({ address1: "Address line 1 did not match" });
     errors.totalErrors++;
   }
 
-  if (validationAddress.address2 && address.address2 && (_.upperCase(address.address2) !== _.upperCase(validationAddress.address2))) {
+  if (validationAddress.address2 && address.address2 &&
+    (_.upperCase(address.address2) !== _.upperCase(validationAddress.address2))) {
     errors.address2.push("Address line 2 did not match");
     errors.totalErrors++;
   }
 
-  if (validationAddress.city && address.city && _.trim(_.upperCase(address.city)) !== _.trim(_.upperCase(validationAddress.city))) {
+  if (validationAddress.city && address.city &&
+    _.trim(_.upperCase(address.city)) !== _.trim(_.upperCase(validationAddress.city))) {
     errors.city.push("City did not match");
     errors.totalErrors++;
   }
 
-  if (validationAddress.postal && address.postal && _.trim(_.upperCase(address.postal)) !== _.trim(_.upperCase(validationAddress.postal))) {
+  if (validationAddress.postal && address.postal
+    && _.trim(_.upperCase(address.postal)) !== _.trim(_.upperCase(validationAddress.postal))) {
     errors.postal.push("Postal Code did not match");
     errors.totalErrors++;
   }
 
-  if (validationAddress.region && address.region && _.trim(_.upperCase(address.region)) !== _.trim(_.upperCase(validationAddress.region))) {
+  if (validationAddress.region && address.region
+    && _.trim(_.upperCase(address.region)) !== _.trim(_.upperCase(validationAddress.region))) {
     errors.region.push("Region did not match");
     errors.totalErrors++;
   }
 
-  if (validationAddress.country && address.country && _.upperCase(address.country) !== _.upperCase(validationAddress.country)) {
+  if (validationAddress.country && address.country
+    && _.upperCase(address.country) !== _.upperCase(validationAddress.country)) {
     errors.country.push("Country did not match");
     errors.totalErrors++;
   }
