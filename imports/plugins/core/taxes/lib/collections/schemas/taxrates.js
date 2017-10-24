@@ -1,4 +1,5 @@
 import SimpleSchema from "simpl-schema";
+import { registerSchema } from "@reactioncommerce/reaction-collections";
 
 /**
 * TaxRates Schema
@@ -21,3 +22,5 @@ export const TaxRates = new SimpleSchema({
     decimal: true
   }
 });
+
+registerSchema("TaxRates", TaxRates);

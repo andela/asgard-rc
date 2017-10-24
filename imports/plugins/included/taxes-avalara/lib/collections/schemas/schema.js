@@ -1,5 +1,6 @@
 import SimpleSchema from "simpl-schema";
 import { TaxPackageConfig } from "/imports/plugins/core/taxes/lib/collections/schemas";
+import { registerSchema } from "@reactioncommerce/reaction-collections";
 
 /**
 * TaxPackageConfig Schema
@@ -83,3 +84,5 @@ export const AvalaraPackageConfig = new SimpleSchema([
     }
   }
 ]);
+
+registerSchema("AvalaraPackageConfig", AvalaraPackageConfig);

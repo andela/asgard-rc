@@ -1,6 +1,7 @@
 import SimpleSchema from "simpl-schema";
 import { Templates } from "/lib/collections";
 import { shopIdAutoValue } from "/lib/collections/schemas/helpers";
+import { registerSchema } from "@reactioncommerce/reaction-collections";
 
 /**
  * EmailTemplates Schema
@@ -82,5 +83,7 @@ export const EmailTemplates = new SimpleSchema({
     optional: true
   }
 });
+
+registerSchema("EmailTemplates", EmailTemplates);
 
 Templates.attachSchema(EmailTemplates, { selector: { type: "email" } });

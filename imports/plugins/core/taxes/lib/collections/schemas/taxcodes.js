@@ -1,4 +1,5 @@
 import SimpleSchema from "simpl-schema";
+import { registerSchema } from "@reactioncommerce/reaction-collections";
 
 /**
 * TaxCodes Schema
@@ -50,3 +51,5 @@ export const TaxCodes = new SimpleSchema({
     blackbox: true
   }
 });
+
+registerSchema("TaxCodes", TaxCodes);

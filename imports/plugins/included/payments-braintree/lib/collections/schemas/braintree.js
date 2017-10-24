@@ -1,5 +1,7 @@
 import SimpleSchema from "simpl-schema";
 import { PackageConfig } from "/lib/collections/schemas/registry";
+import { registerSchema } from "@reactioncommerce/reaction-collections";
+
 
 /**
  *  Meteor.settings.braintree =
@@ -43,6 +45,8 @@ export const BraintreePackageConfig = new SimpleSchema([
   }
 ]);
 
+registerSchema("BraintreePackageConfig", BraintreePackageConfig);
+
 export const BraintreePayment = new SimpleSchema({
   payerName: {
     type: String,
@@ -70,3 +74,5 @@ export const BraintreePayment = new SimpleSchema({
     label: "CVV"
   }
 });
+
+registerSchema("BraintreePayment", BraintreePayment);
