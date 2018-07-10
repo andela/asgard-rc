@@ -44,7 +44,7 @@ reaction
 
 Learn more on how to [configure your project](https://docs.reactioncommerce.com/reaction-docs/master/configuration).
 
-# Get involved
+# Get involved in the project 
 
 ## Documentation and tools
 - [Developer documentation](https://docs.reactioncommerce.com)
