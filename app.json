@@ -1,0 +1,36 @@
+{
+  "name": "asgard-rc",
+  "scripts": {
+  },
+  "env": {
+    "BUILDPACK_CLEAR_CACHE": {
+      "required": true
+    },
+    "BUILDPACK_PRELAUNCH_METEOR": {
+      "required": true
+    },
+    "MONGODB_URI": {
+      "required": true
+    },
+    "PAPERTRAIL_API_TOKEN": {
+      "required": true
+    },
+    "ROOT_URL": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "mongolab",
+    "papertrail"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/swrdfish/meteor-buildpack-horse.git"
+    }
+  ]
+}
