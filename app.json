@@ -17,6 +17,9 @@
     },
     "ROOT_URL": {
       "required": true
+    },
+    "TOOL_NODE_FLAGS": {
+      "required": true
     }
   },
   "formation": {

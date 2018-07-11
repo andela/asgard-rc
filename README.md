@@ -1,7 +1,5 @@
 # Reaction Commerce
 
-[![bitHound Overall Score](https://www.bithound.io/github/reactioncommerce/reaction/badges/score.svg)](https://www.bithound.io/github/reactioncommerce/reaction) [![bitHound Dev Dependencies](https://www.bithound.io/github/reactioncommerce/reaction/badges/devDependencies.svg)](https://www.bithound.io/github/reactioncommerce/reaction/9a858eb459d7260d5ae59124c2b364bc791a3e70/dependencies/npm) [![bitHound Code](https://www.bithound.io/github/reactioncommerce/reaction/badges/code.svg)](https://www.bithound.io/github/reactioncommerce/reaction) [![Circle CI](https://circleci.com/gh/reactioncommerce/reaction.svg?style=svg)](https://circleci.com/gh/reactioncommerce/reaction) [![Gitter](https://badges.gitter.im/JoinChat.svg)](https://gitter.im/reactioncommerce/reaction?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [Reaction](http://reactioncommerce.com) is an event-driven, real-time reactive commerce platform built with JavaScript (ES6). It plays nicely with npm, Docker, and React.
 
 ![Reaction v.1.0.0](https://raw.githubusercontent.com/reactioncommerce/reaction-docs/master/assets/rc-desktop.png)
@@ -28,21 +26,29 @@ Since anything in our codebase can be extended, overwritten, or installed as a p
 
 Reaction requires Meteor, Git, MongoDB, OS-specific build tools and optionally, ImageMagick. For step-by-step instructions, check out the [Requirements](https://docs.reactioncommerce.com/reaction-docs/master/requirements).
 
-### Install and create your first store
+### Install and start application on local machine
 
 Install the [Reaction CLI](https://github.com/reactioncommerce/reaction-cli) to get started with Reaction:
 ```bash
 npm install -g reaction-cli
 ```
 
-Create your store:
+Clone the repository
 ```bash
-reaction init
-cd reaction
-reaction
+git clone https://github.com/andela/asgard-rc.git
 ```
 
-Learn more on how to [configure your project](https://docs.reactioncommerce.com/reaction-docs/master/configuration).
+Install all dependencies
+```bash
+cd asgard-rc
+
+meteor npm install
+```
+
+Start the application
+```bash
+reaction
+```
 
 # Get involved
 
