@@ -2,6 +2,8 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/1a2efa0e4aa5543aa6f1/maintainability)](https://codeclimate.com/github/andela/asgard-rc/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1a2efa0e4aa5543aa6f1/test_coverage)](https://codeclimate.com/github/andela/asgard-rc/test_coverage)
+[![CircleCI](https://circleci.com/gh/andela/asgard-rc.svg?style=svg)](https://circleci.com/gh/andela/asgard-rc)
+
 
 [Reaction](http://reactioncommerce.com) is an event-driven, real-time reactive commerce platform built with JavaScript (ES6). It plays nicely with npm, Docker, and React.
 
