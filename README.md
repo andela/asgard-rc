@@ -1,5 +1,8 @@
 # Reaction Commerce
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/1a2efa0e4aa5543aa6f1/maintainability)](https://codeclimate.com/github/andela/asgard-rc/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/1a2efa0e4aa5543aa6f1/test_coverage)](https://codeclimate.com/github/andela/asgard-rc/test_coverage)
+
 [Reaction](http://reactioncommerce.com) is an event-driven, real-time reactive commerce platform built with JavaScript (ES6). It plays nicely with npm, Docker, and React.
 
 ![Reaction v.1.0.0](https://raw.githubusercontent.com/reactioncommerce/reaction-docs/master/assets/rc-desktop.png)

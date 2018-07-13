@@ -12,6 +12,7 @@ jobs:
       - DOCKER_COMPOSE_VERSION: 1.15.0
       - METEOR_ALLOW_SUPERUSER: true
       - TOOL_NODE_FLAGS: "--max-old-space-size=4096"
+      - CC_TEST_REPORTER_ID: ${CC_TEST_REPORTER_ID}
 
     steps:
       - setup_remote_docker
@@ -33,6 +34,11 @@ jobs:
       # install app dependencies
 
       - run: meteor npm install
+
+      - run:
+          name: Setup Code Climate test-reporter
+          command: npm install npm@latest -g
+          command: npm install codeclimate-test-reporter -g
 
       # run tests
       - restore_cache:
