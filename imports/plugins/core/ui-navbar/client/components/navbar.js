@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components } from "@reactioncommerce/reaction-components";
 import { Meteor } from "meteor/meteor";
+import { Reaction } from "/client/api";
+import startTour from "/imports/plugins/custom/vendor-tour/client/vendorTour";
 
 // TODO: Delete this, and do it the react way - Mike M.
 async function openSearchModalLegacy(props) {
@@ -38,6 +40,11 @@ class NavBar extends Component {
 
   handleCloseNavbar = () => {
     this.setState({ navBarVisible: false });
+  }
+
+  handleStartTour = () => {
+    Reaction.Router.go("/");
+    startTour();
   }
 
   handleOpenSearchModal = () => {
@@ -89,7 +96,9 @@ class NavBar extends Component {
   renderNotificationIcon() {
     if (this.props.hasProperPermission) {
       return (
-        <Components.Notification />
+        <span className="notification">
+          <Components.Notification />
+        </span>
       );
     }
   }
@@ -131,6 +140,17 @@ class NavBar extends Component {
       </div>
     );
   }
+  renderVendorTour() {
+    return (
+      <div id="take-tour">
+        <Components.FlatButton
+          label="TAKE TOUR"
+          kind="flat"
+          onClick={this.handleStartTour}
+        />
+      </div>
+    );
+  }
 
   render() {
     return (
@@ -138,6 +158,7 @@ class NavBar extends Component {
         {this.renderHamburgerButton()}
         {this.renderBrand()}
         {this.renderTagNav()}
+        {Reaction.hasPermission("owner", Meteor.userId(), Reaction.getShopId()) && Meteor.user().username !== "admin" && this.renderVendorTour()}
         {this.renderSearchButton()}
         {this.renderNotificationIcon()}
         {this.renderLanguage()}
