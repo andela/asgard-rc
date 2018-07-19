@@ -1,0 +1,88 @@
+* .btn {
+  border-radius: 0; }
+
+* .btn-lg {
+  border-radius: 0; }
+
+.nav-secondary {
+  border: 1px solid lightgray; }
+  .nav-secondary a {
+    text-decoration: none;
+    color: #484848; }
+
+.header .container {
+  margin-top: 22px;
+  min-height: 350px; }
+
+.header .head1 {
+  height: 350px;
+  background: url(resources/assets/shoppin.jpeg) center no-repeat;
+  background-size: 100%;
+  position: relative; }
+  .header .head1 .head1-texts {
+    margin-left: 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); }
+
+    .header .head1 .head1-texts h2 {
+      margin-bottom: 30px; }
+
+  
+.header .head2 {
+  height: 200px;
+  background: url(resources/assets/shoe-nike.jpeg) center no-repeat;
+  background-size: 100%;
+  position: relative; }
+  .header .head2 .shop {
+    position: absolute;
+    bottom: 8px;
+    right: 16px; }
+
+.header .head3 {
+  height: 136px;
+  background-color: #F4F4F4; }
+  .header .head3 .head3-text {
+    margin-left: 15px;
+    margin-top: 14px;
+    padding-top: 1px; }
+  .header .head3 a {
+    color: #7e7e7e;
+    text-decoration: none; }
+
+#featured-collections {
+  margin-top: 25px; }
+  #featured-collections .products {
+    margin-top: 20px; }
+    #featured-collections .products .col-sm-3 img {
+      height: 200px;
+      width: 100%; }
+    #featured-collections .products .col-sm-3 .product-details {
+      margin-top: 22px; }
+
+#digital-collections {
+  margin-top: 25px;
+  margin-bottom: 35px; }
+  #digital-collections .products .col-sm-2 img {
+    height: 170px;
+    width: 100%; }
+
+#footer {
+  background-color: #ebebeb; }
+  #footer ul {
+    list-style-type: none; }
+  #footer a {
+    color: #4c4c4d;
+    text-decoration: none; }
+  #footer i {
+    font-size: 25px;
+    margin: 5px;
+    color: #2f2f2f; }
+  #footer .Copyright {
+    color: #7e7d7d;
+    margin-top: 20px;
+    margin-bottom: 30px; }
+  #footer .py-5 {
+    padding-top: 30px; }
+  #footer li {
+    margin-top: 5px; }
