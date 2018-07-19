@@ -1,0 +1,224 @@
+
+
+import React, { Component } from "react";
+import ReactStars from "react-stars";
+import { Meteor } from "meteor/meteor";
+import "../stylesheet/style.css";
+import PropTypes from "prop-types";
+import { Reaction } from "/client/api";
+import moment from "moment";
+
+// import toastrOption from "../../utils/toastrOption";
+/**
+ * @class Review
+ *
+ * @classdesc user post review
+ *
+ */
+class Reviews extends Component {
+  /**
+   * constructor - contains the constructor
+   *
+   * @param  {object} props the properties of the class component
+   *
+   * @return {void} no return or void
+   *
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      comments: "",
+      rate: 0,
+      username: "",
+      disableBtn: true,
+      reviews: ""
+    };
+    this.onChange = this.onChange.bind(this);
+    this.ratingChanged = this.ratingChanged.bind(this);
+    this.addReview = this.addReview.bind(this);
+    this.displayReviews = this.displayReviews.bind(this);
+  }
+
+
+  /**
+ *
+ * @returns { object } updated state
+ * @memberof Ratings
+*/
+  componentDidMount() {
+    const productName = Reaction.Router.getParam("handle");
+    Meteor.call("getAllReviews", productName, (error, response) => {
+      if (error) {
+        return error;
+      }
+      this.setState({ reviews: response });
+    });
+  }
+
+  /**
+   * @description - handles the onchange event
+   *
+   * @param  {object} event the event for the content field
+   *
+   * @return {void}
+   */
+  onChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+    if (event.target.name === "comments" && event.target.value.trim() === "") {
+      this.setState({
+        disableBtn: true
+      });
+      return false;
+    }
+    this.setState({
+      disableBtn: false
+    });
+
+    return true;
+  }
+
+  displayReviews() {
+    const allReviews = this.state.reviews;
+    if (allReviews.length === 0) {
+      return (<div className="comment-contents">No reviews found!</div>);
+    }
+    return (
+      allReviews.map((review) => (
+        <div key={review._id}>
+          <div className="comment-contents">
+            <a href="#" className="comment-author" title="Comment Author">
+              <h4>{review.username}</h4>
+            </a>
+            <p>{review.comments}</p>
+            <small className="text-muted">
+              created at:
+              {moment(review.createdAt).format("Do MMMM YYYY HH:mm")}
+            </small>
+            <ReactStars
+              count={5}
+              size={10}
+              edit={false}
+              value={review.rating}
+            />
+          </div>
+        </div>
+      ))
+    );
+  }
+  /**
+   * @description - handles user ratings
+   *
+   * @param  {Number} newRating
+   *
+   * @return {void}
+   */
+  ratingChanged = (newRating) => {
+    this.setState(() => (
+      { rate: newRating }
+    ));
+  }
+
+  addReview(event) {
+    event.preventDefault();
+    if (this.state.rate === 0 && this.state.comments.trim() === "") {
+      Alerts.toast("Your review is highly needed", "error", {
+        placement: "productDetail",
+        autoHide: 10000
+      });
+    } else if (this.state.rate === 0 && this.state.comments.trim() !== "") {
+      Alerts.toast("Your rating is needed to serve you better", "error", {
+        placement: "productDetail",
+        autoHide: 10000
+      });
+    } else {
+      const reviewObject = {
+        rating: this.state.rate,
+        comments: this.state.comments,
+        username: Meteor.user().emails[0].address.split("@")[0],
+        productName: Reaction.Router.getParam("handle")
+      };
+      Meteor.call("createReview", reviewObject, (err, response) => {
+        const productName = Reaction.Router.getParam("handle");
+        if (response) {
+          this.setState({
+            rate: 0,
+            comments: ""
+          });
+          Meteor.call("getAllReviews", productName, (error, result) => {
+            if (error) {
+              return error;
+            }
+            this.setState({ reviews: result });
+          });
+        }
+      });
+    }
+  }
+  /**
+   * @description render - renders the class component
+   *
+   * @return {object} returns an object
+   *
+   */
+  render() {
+    const { ratingChanged, onChange, addReview, displayReviews } = this;
+    return (
+      <div>
+        <div className="bus-info-reviews">
+          <h3><b>Reviews</b></h3>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col">
+                <div className="post-form">
+                  <div className="display-reviews">
+                    { displayReviews() }
+                  </div>
+                  <form
+                    action="#"
+                    method=""
+                    role="form"
+                    onSubmit={addReview}
+                  >
+                    <textarea
+                      name="comments"
+                      value={this.state.comments}
+                      onChange={onChange}
+                      required
+                    />
+                    <div>
+                      <ReactStars
+                        count={5}
+                        onChange={ratingChanged}
+                        size={15}
+                        color2={"#ffd700"}
+                        value={this.state.rate}
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={this.state.disableBtn}
+                      className="btn send-button"
+                    >
+                      Add review
+                    </button>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+
+Reviews.propTypes = {
+  rating: PropTypes.string
+};
+
+
+export default Reviews;

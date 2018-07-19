@@ -14,7 +14,8 @@
     "Alerts": true,  // this needs to get cleaned up, but ignoring for now
     "jest": true,
     "expect": true,
-    "test": true
+    "test": true,
+
   },
   "parserOptions": {
      "ecmaVersion": 6,

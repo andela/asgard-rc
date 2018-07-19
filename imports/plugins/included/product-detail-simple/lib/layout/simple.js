@@ -189,6 +189,11 @@ export default function blocks() {
               paddingTop: 20
             }
           }
+        },
+
+        // Add Reviews component
+        {
+          component: "Reviews"
         }
 
       ]
