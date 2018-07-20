@@ -152,6 +152,12 @@ class NavBar extends Component {
     );
   }
 
+  renderStaticPages() {
+    return (
+      <Components.StaticPages />
+    );
+  }
+
   render() {
     return (
       <div className="rui navbar">
@@ -162,6 +168,7 @@ class NavBar extends Component {
         {this.renderSearchButton()}
         {this.renderNotificationIcon()}
         {this.renderLanguage()}
+        {this.renderStaticPages()}
         {this.renderCurrency()}
         {this.renderMainDropdown()}
         {this.renderCartContainerAndPanel()}
