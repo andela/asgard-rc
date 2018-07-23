@@ -26,7 +26,6 @@ class SortableTable extends Component {
       maxPages: 0,
       query: props.query || {}
     };
-
     this.handleFilterInput = this.handleFilterInput.bind(this);
   }
 
@@ -272,7 +271,10 @@ class SortableTable extends Component {
   render() {
     const { ...otherProps } = this.props;
     const defaultClassName = "-striped -highlight";
-
+    const displayNoResultFound = () => {
+      const displayText = <span className="sortableTable-noDataText">{this.props.noDataMessage}</span>;
+      return displayText;
+    };
     // All available props: https://github.com/tannerlinsley/react-table#props
     return (
       <div>
@@ -288,7 +290,7 @@ class SortableTable extends Component {
           previousText={otherProps.previousText}
           nextText={otherProps.nextText}
           loadingText={otherProps.loadingText}
-          noDataText={() => <span className="sortableTable-noDataText">{this.props.noDataMessage}</span>}
+          noDataText={displayNoResultFound()}
           pageText={otherProps.pageText}
           ofText={otherProps.ofText}
           rowsText={otherProps.rowsText}

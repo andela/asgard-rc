@@ -21,16 +21,13 @@ function setCaretPosition(ctrl, pos) {
 class NumericInput extends Component {
   constructor(props) {
     super(props);
-
     // Set default state
     this.state = {
       value: this.props.value
     };
-
     // Bind event handlers
     this.handleChange = this.handleChange.bind(this);
   }
-
   /**
    * update state when component receives props
    * @param  {Object} nextProps new props
@@ -63,14 +60,11 @@ class NumericInput extends Component {
 
     return 0;
   }
-
   get scale() {
     const parts = this.state.value.split(".");
-
     if (parts.length === 2) {
       return parts[1].length;
     }
-
     return 0;
   }
 
@@ -82,13 +76,10 @@ class NumericInput extends Component {
    */
   format(value, format) {
     const moneyFormat = format || this.moneyFormat;
-
     const decimal = moneyFormat.decimal || undefined;
     const unformatedValue = this.unformat(value, decimal);
-
     return accounting.formatMoney(unformatedValue, moneyFormat);
   }
-
   /**
    * unformat numeric string
    * @param  {String} value String value to unformat
