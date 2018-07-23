@@ -25,9 +25,6 @@ const CoreLayout = ({ actionViewIsOpen, structure }) => {
         </main>
       }
 
-      { Template[layoutFooter] &&
-        <Blaze template={layoutFooter} className="reaction-navigation-footer footer-default" />
-      }
     </div>
   );
 };
