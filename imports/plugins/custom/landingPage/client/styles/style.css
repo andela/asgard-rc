@@ -86,3 +86,9 @@
     padding-top: 30px; }
   #footer li {
     margin-top: 5px; }
+
+  .feed-container {
+    max-height: 20rem;
+    width: 30rem;
+    overflow: scroll; 
+      } 
