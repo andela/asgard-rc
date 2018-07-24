@@ -1,5 +1,5 @@
 <template name="staticPageManagement">
-    <div class='container staticPageDiv pageManager'>
+    <div class='container staticPageDiv page-manager'>
         <div class='row'>
             <div>
                 {{> addOrEditPageForm}}
@@ -14,7 +14,7 @@
 <template name="managePageForm">
     <div class="static-page-panel panel panel-info">
         <div class="panel-body">
-            <h3 class="table-top"> Manage existing pages here</h3>
+            <h3 class="table-top blue-text"> Manage existing pages here</h3>
             {{#if alreadyAddedPages.count}}
             <div class="table-responsive">
                 <table class="table-hover table-striped" style="width: 100%;">
@@ -32,10 +32,10 @@
                             <td>{{page.pageAddress}}</td>
                             <td>
                                 <div class='btn-group' style="margin-top: 5px;">
-                                    <button type="button" class="btn btn-warning editPage" style="margin-right: 10px">Edit
+                                    <button type="button" class="btn btn-safe editPage" style="margin-right: 10px">Edit
                                         <i class="fa fa-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger deletePage">Delete
+                                    <button type="button" class="btn btn-caution deletePage">Delete
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
@@ -46,7 +46,7 @@
                 </table>
             </div>
             {{else}}
-            <div class='alert alert-info text-center'>
+            <div class='alert alerts-info text-center'>
                 <h4>You have not added any page yet!</h4>
             </div>
             {{/if}}
@@ -56,21 +56,21 @@
 
 <template name="addOrEditPageForm" class="addPageForm">
     <form class="static-page">
-        <div class="form-group label-info transparent">
-            <label for="sp-name">Page Title:</label>
+        <div class="form-group form-labels transparent">
+            <label for="sp-name" class="labelings">Page Title:</label>
             <input type="text" name="name" id="sp-name" placeholder="Enter page name.. (e.g. Contact)" class="form-control" required="required">
         </div>
-        <div class="form-group label-info transparent">
-            <label for="sp-url">Page URL Address:</label>
+        <div class="form-group form-labels transparent">
+            <label for="sp-url" class="labelings">Page URL Address:</label>
             <input type="text" name="url" id="sp-url" placeholder="Enter page address.. (e.g. 'contact')" class="form-control" required="required">
             <input class="edit-page-data" type='hidden'>
         </div>
-        <div class="form-group label-info transparent">
-            <label for="sp-content">Page Content:</label>
+        <div class="form-group form-labels transparent">
+            <label for="sp-content" class="labelings">Page Content:</label>
             <textarea name="content" id="sp-content" style="height: 21rem;" class="form-control spform large-input"></textarea>
         </div>
         <div class="form-group transparent">
-            <button type="submit" class="form-group save-static-page btn btn-primary btn-color">Create Page</button>
+            <button type="submit" class="form-group save-static-page btn btn-primary btn-safe">Create Page</button>
         </div>
     </form>
 </template>
