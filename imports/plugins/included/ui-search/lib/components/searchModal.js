@@ -13,13 +13,25 @@ class SearchModal extends Component {
     handleClick: PropTypes.func,
     handleTagClick: PropTypes.func,
     handleToggle: PropTypes.func,
+    priceRanges: PropTypes.array,
     products: PropTypes.array,
     siteName: PropTypes.string,
     tags: PropTypes.array,
     unmountMe: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
+    vendors: PropTypes.array
   }
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterBy: {
+        price: "",
+        vendor: "",
+        hashtags: ""
+      },
+      sortBy: ""
+    };
+  }
   renderSearchInput() {
     return (
       <div className="rui search-modal-input">
@@ -41,7 +53,6 @@ class SearchModal extends Component {
       </div>
     );
   }
-
   renderSearchTypeToggle() {
     if (Reaction.hasPermission("admin")) {
       return (
@@ -71,6 +82,51 @@ class SearchModal extends Component {
     }
   }
 
+  handleFilterChange = (event) => {
+    const { value, name } = event.target;
+    this.setState({
+      ...this.state,
+      filterBy: { ...this.state.filterBy, [name]: value }
+    });
+  }
+
+  handleSortChange = (event) => {
+    const { value } = event.target;
+    this.setState({ sortBy: value });
+  }
+
+  handlePriceFilter = (products, range) => {
+    if (range === "1-9.99") {
+      return products.filter((product) => product.price.min >= 1 && product.price.max <= 9.99);
+    }
+    if (range === "10-99.99") {
+      return products.filter((product) => product.price.min >= 10 && product.price.max <= 99.99);
+    }
+    if (range === "100-999.99") {
+      return products.filter((product) => product.price.min >= 100 && product.price.max <= 999.99);
+    }
+    if (range === "1000-9999.99") {
+      return products.filter((product) => product.price.min >= 1000 && product.price.max <= 9999.99);
+    }
+  }
+
+  SortProducts = (products, sortBy) => {
+    switch (sortBy) {
+      case "asc":
+        return products.sort((prev, next) => prev.title > next.title);
+      case "desc":
+        return products.sort((prev, next) => prev.title < next.title);
+      case "low-high":
+        return products.sort((prev, next) => prev.price.min > next.price.min);
+      case "high-low":
+        return products.sort((prev, next) => prev.price.min < next.price.min);
+      case "newarrivals":
+        return products.sort((prev, next) => Date.parse(prev.createdAt) < Date.parse(next.createdAt));
+      default:
+        return products;
+    }
+  }
+
   renderProductSearchTags() {
     return (
       <div className="rui search-modal-tags-container">
@@ -90,7 +146,80 @@ class SearchModal extends Component {
     );
   }
 
+  renderProductSearchFilter = () => {
+    const vendorOptions = this.props.vendors.map(vendor =>
+      <option key={vendor} value={vendor}>{vendor}</option>);
+
+    const tagsOptions = this.props.tags.map(tag =>
+      <option key={tag._id} value={tag._id}>{tag.name}</option>);
+
+    return (
+      <span className="rui product-filter pull-left">
+        <h3>Filter By</h3>
+        <div className="filter-options">
+          <span className="rui-options">
+        Vendors:
+            &nbsp;<select name="vendor" onChange={(event) => this.handleFilterChange(event)}>
+              <option value="">Select a Vendor</option>
+              {vendorOptions}
+            </select>
+          </span>
+          <span className="rui-options">
+        Price:
+          &nbsp;<select name="price" onChange={(event) => this.handleFilterChange(event)}>
+              <option value="">Select a price Range</option>
+              <option value="1-9.99">₦1.00-₦9.99</option>
+              <option value="10-99.99">₦10.00-₦99.99</option>
+              <option value="100-999.99">₦100.00-₦999.99</option>
+              <option value="1000-9999.99">₦1000.00-₦9999.99</option>
+            </select>
+          </span>
+          <span className="rui-options">
+        Tags:
+          &nbsp;<select name="hashtags" onChange={(event) => this.handleFilterChange(event)}>
+              <option value="">Select a tag</option>
+              {tagsOptions}
+            </select>
+          </span>
+        </div>
+      </span>
+    );
+  }
+
+  renderSortProducts() {
+    return (
+      <span className="rui product-sort pull-right">
+        <span> <h3>Sort By</h3> </span>
+        <select name="sortBy" onChange={(event) => this.handleSortChange(event)}>
+          <option value="">Select an Option to SortBy</option>
+          <option value="asc">Ascending Order</option>
+          <option value="desc">Descending Order</option>
+          <option value="newarrivals">New Arrivals</option>
+          <option value="low-high">Price: Low - High</option>
+          <option value="high-low">Price: High - Low</option>
+        </select>
+      </span>
+    );
+  }
+
+
   render() {
+    let { products } = this.props;
+    const { filterBy, sortBy } = this.state;
+    const { price, vendor, hashtags } = filterBy;
+    if (price !== "") {
+      products = this.handlePriceFilter(products, price);
+    }
+    if (hashtags !== "") {
+      products = products.filter((product) => product.hashtags.indexOf(hashtags) !== -1);
+    }
+    if (vendor !== "") {
+      products = products.filter((product) => product.vendor === vendor);
+    }
+    if (sortBy !== "") {
+      products = this.SortProducts(products, sortBy);
+    }
+
     return (
       <div>
         <div className="rui search-modal-close"><IconButton icon="fa fa-times" onClick={this.props.unmountMe} /></div>
@@ -99,10 +228,14 @@ class SearchModal extends Component {
           {this.renderSearchTypeToggle()}
           {this.props.tags.length > 0 && this.renderProductSearchTags()}
         </div>
+        {this.props.products.length > 0 && <div className="rui filterContainer">
+          {this.renderProductSearchFilter()}
+          {this.renderSortProducts()}
+        </div>}
         <div className="rui search-modal-results-container">
-          {this.props.products.length > 0 &&
+          {products.length > 0 &&
             <ProductGridContainer
-              products={this.props.products}
+              products={products}
               unmountMe={this.props.unmountMe}
               isSearch={true}
             />

@@ -20,7 +20,8 @@ const wrapComponent = (Comp) => (
         collection: "products",
         value: localStorage.getItem("searchValue") || "",
         renderChild: true,
-        facets: []
+        facets: [],
+        filterValue: ""
       };
     }
 
@@ -85,6 +86,7 @@ const wrapComponent = (Comp) => (
                 handleToggle={this.handleToggle}
                 handleAccountClick={this.handleAccountClick}
                 handleTagClick={this.handleTagClick}
+                handleFilterChange={this.handleFilterChange}
                 value={this.state.value}
                 unmountMe={this.handleChildUnmount}
                 searchCollection={this.state.collection}

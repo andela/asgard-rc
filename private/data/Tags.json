@@ -22,4 +22,52 @@
   },
   "_id": "rpjCvTBGjhBi2xdro",
   "shopId": "J8Bhq3uTtdgwZx3rz"
+}, {
+  "slug": "electronics",
+  "name": "Electronics",
+  "isTopLevel": true,
+  "updatedAt": {
+    "$date": "2014-04-09T13:23:57.412-0700"
+  },
+  "createdAt": {
+    "$date": "2014-04-09T13:23:57.412-0700"
+  },
+  "_id": "rpjCvTBGjhBi2xdra",
+  "shopId": "J8Bhq3uTtdgwZx3rz"
+}, {
+  "slug": "clothes",
+  "name": "Clothes",
+  "isTopLevel": true,
+  "updatedAt": {
+    "$date": "2014-04-09T13:23:57.412-0700"
+  },
+  "createdAt": {
+    "$date": "2014-04-09T13:23:57.412-0700"
+  },
+  "_id": "rpjCvTBGjhBi2xdrb",
+  "shopId": "J8Bhq3uTtdgwZx3rz"
+}, {
+  "slug": "phones",
+  "name": "Phones",
+  "isTopLevel": true,
+  "updatedAt": {
+    "$date": "2014-04-09T13:23:57.412-0700"
+  },
+  "createdAt": {
+    "$date": "2014-04-09T13:23:57.412-0700"
+  },
+  "_id": "rpjCvTBGjhBi2xdrc",
+  "shopId": "J8Bhq3uTtdgwZx3rz"
+}, {
+  "slug": "android",
+  "name": "Android",
+  "isTopLevel": true,
+  "updatedAt": {
+    "$date": "2014-04-09T13:23:57.412-0700"
+  },
+  "createdAt": {
+    "$date": "2014-04-09T13:23:57.412-0700"
+  },
+  "_id": "rpjCvTBGjhBi2xdrd",
+  "shopId": "J8Bhq3uTtdgwZx3rz"
 }]

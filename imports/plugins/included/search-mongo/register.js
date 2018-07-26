@@ -12,14 +12,16 @@ Reaction.registerPackage({
         description: true,
         pageTitle: false,
         metafields: true,
-        vendor: true
+        vendor: true,
+        createdAt: true
       },
       weights: {
         title: 10,
         description: 5,
         pageTitle: 3,
         metafields: 1,
-        vendor: 4
+        vendor: 4,
+        createdAt: 2
       }
     }
   },

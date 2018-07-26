@@ -33,6 +33,22 @@ function getProductHashtags(productResults) {
   }, []);
 }
 
+function getProductVendors(productResults) {
+  const foundVendors = []; // Object to keep track of results for O(1) lookup
+  productResults.forEach((product) => {
+    foundVendors.push(product.vendor);
+  });
+  return foundVendors;
+}
+
+function getPriceRange(productResults) {
+  const priceRanges = [];
+  productResults.forEach((product) => {
+    priceRanges.push(product.price.range);
+  });
+  return priceRanges;
+}
+
 function composer(props, onData) {
   const searchResultsSubscription = Meteor.subscribe("SearchResults", props.searchCollection, props.value, props.facets);
   const shopMembersSubscription = Meteor.subscribe("ShopMembers");
@@ -42,17 +58,20 @@ function composer(props, onData) {
     let productResults = [];
     let tagSearchResults = [];
     let accountResults = [];
+    let vendors = [];
+    let priceRanges = [];
 
     /*
     * Product Search
     */
     if (props.searchCollection === "products") {
       productResults = Collections.ProductSearch.find().fetch();
-
       const productHashtags = getProductHashtags(productResults);
       tagSearchResults = Collections.Tags.find({
         _id: { $in: productHashtags }
       }).fetch();
+      vendors = getProductVendors(productResults);
+      priceRanges = getPriceRange(productResults);
     }
 
     /*
@@ -66,7 +85,9 @@ function composer(props, onData) {
       siteName,
       products: productResults,
       accounts: accountResults,
-      tags: tagSearchResults
+      tags: tagSearchResults,
+      vendors,
+      priceRanges
     });
   }
 }
