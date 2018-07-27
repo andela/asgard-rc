@@ -151,6 +151,14 @@ export default function blocks() {
           }
         },
         {
+          component: "ProductKind",
+          props: {
+            style: {
+              paddingTop: 0
+            }
+          }
+        },
+        {
           component: "ProductField",
           props: {
             fieldName: "description",
