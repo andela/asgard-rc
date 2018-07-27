@@ -1,6 +1,7 @@
 import {
   Meteor
 } from "meteor/meteor";
+import { Orders } from "/lib/collections";
 import { Reviews } from "../../lib/collection";
 import {
   check
@@ -21,6 +22,19 @@ Meteor.methods({
     return Reviews.find({
       productName
     }, { sort: { createdAt: -1 } }).fetch();
+  },
+  "purchasedProducts"(userId) {
+    check(userId, String);
+    const userOrders = Orders.find({ userId }).fetch();
+    const userPurchasedItems = [];
+    if (userOrders.length > 0) {
+      userOrders.forEach((order) => {
+        order.items.forEach((item) => {
+          userPurchasedItems.push(item.productId);
+        });
+      });
+    }
+    return userPurchasedItems;
   }
 });
 

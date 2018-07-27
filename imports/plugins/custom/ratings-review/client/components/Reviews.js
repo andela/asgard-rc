@@ -1,14 +1,12 @@
-
-
 import React, { Component } from "react";
 import ReactStars from "react-stars";
 import { Meteor } from "meteor/meteor";
 import "../stylesheet/style.css";
 import PropTypes from "prop-types";
 import { Reaction } from "/client/api";
+import { ReactionProduct } from "/lib/api";
 import moment from "moment";
 
-// import toastrOption from "../../utils/toastrOption";
 /**
  * @class Review
  *
@@ -122,6 +120,13 @@ class Reviews extends Component {
 
   addReview(event) {
     event.preventDefault();
+    const isAuthenticated = Meteor.user().emails.length > 0 ? true : false;
+    if (!isAuthenticated) {
+      return Alerts.toast("You need to be logged in to post a review", "error", {
+        placement: "productDetail",
+        autoHide: 10000
+      });
+    }
     if (this.state.rate === 0 && this.state.comments.trim() === "") {
       Alerts.toast("Your review is highly needed", "error", {
         placement: "productDetail",
@@ -139,23 +144,44 @@ class Reviews extends Component {
         username: Meteor.user().emails[0].address.split("@")[0],
         productName: Reaction.Router.getParam("handle")
       };
-      Meteor.call("createReview", reviewObject, (err, response) => {
-        const productName = Reaction.Router.getParam("handle");
+      Meteor.call("purchasedProducts", Meteor.userId(), (err, response) => {
+        let purchasedProducts;
+        if (err) {
+          return err;
+        }
         if (response) {
-          this.setState({
-            rate: 0,
-            comments: ""
-          });
-          Meteor.call("getAllReviews", productName, (error, result) => {
-            if (error) {
-              return error;
-            }
-            this.setState({ reviews: result });
-          });
+          purchasedProducts = response;
+          if (purchasedProducts.indexOf(ReactionProduct.selectedProductId()) !== -1) {
+            Meteor.call("createReview", reviewObject, (error, review) => {
+              const productName = Reaction.Router.getParam("handle");
+              if (review) {
+                this.setState({
+                  rate: 0,
+                  comments: ""
+                });
+                Alerts.toast("Review Submitted", "success", {
+                  placement: "productDetail",
+                  autoHide: 10000
+                });
+                Meteor.call("getAllReviews", productName, (errors, result) => {
+                  if (errors) {
+                    return errors;
+                  }
+                  this.setState({ reviews: result });
+                });
+              }
+            });
+          } else {
+            Alerts.toast("You need to be purchase this product to review it", "error", {
+              placement: "productDetail",
+              autoHide: 10000
+            });
+          }
         }
       });
     }
   }
+
   /**
    * @description render - renders the class component
    *
