@@ -172,7 +172,7 @@ class Reviews extends Component {
               }
             });
           } else {
-            Alerts.toast("You need to be purchase this product to review it", "error", {
+            Alerts.toast("You need to purchase this product to review it", "error", {
               placement: "productDetail",
               autoHide: 10000
             });
