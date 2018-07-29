@@ -89,4 +89,8 @@
     max-height: 20rem;
     width: 30rem;
     overflow: scroll; 
-      } 
+    } 
+    
+  .btn .caret {
+    margin-left: 8px;
+  }

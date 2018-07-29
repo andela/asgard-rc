@@ -4,6 +4,7 @@ import { Components } from "@reactioncommerce/reaction-components";
 import { Meteor } from "meteor/meteor";
 import { Reaction } from "/client/api";
 import startTour from "/imports/plugins/custom/vendor-tour/client/vendorTour";
+import startCustomerTour from "/imports/plugins/custom/customer-tour/client/customerTour";
 
 // TODO: Delete this, and do it the react way - Mike M.
 async function openSearchModalLegacy(props) {
@@ -45,6 +46,11 @@ class NavBar extends Component {
   handleStartTour = () => {
     Reaction.Router.go("/");
     startTour();
+  }
+
+  customerStartTour = () => {
+    Reaction.Router.go("/");
+    startCustomerTour();
   }
 
   handleOpenSearchModal = () => {
@@ -142,12 +148,22 @@ class NavBar extends Component {
   }
   renderVendorTour() {
     return (
-      <div id="take-tour">
-        <Components.FlatButton
-          label="TAKE TOUR"
-          kind="flat"
-          onClick={this.handleStartTour}
-        />
+      <div id="take-tour" className="dropdown">
+        <button className="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="true"
+        >
+          TAKE A TOUR
+          <span className="caret" />
+        </button>
+        <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+          {
+            Reaction.hasPermission("owner", Meteor.userId(), Reaction.getShopId()) && Meteor.user().username !== "admin" ?
+              <li><a  onClick={this.handleStartTour}>VENDOR TOUR</a></li>
+              : null
+          }
+          <li><a onClick={this.customerStartTour}>CUSTOMER TOUR</a></li>
+        </ul>
       </div>
     );
   }
@@ -164,7 +180,7 @@ class NavBar extends Component {
         {this.renderHamburgerButton()}
         {this.renderBrand()}
         {this.renderTagNav()}
-        {Reaction.hasPermission("owner", Meteor.userId(), Reaction.getShopId()) && Meteor.user().username !== "admin" && this.renderVendorTour()}
+        {Meteor.user().username !== "admin" && this.renderVendorTour()}
         {this.renderSearchButton()}
         {this.renderNotificationIcon()}
         {this.renderLanguage()}
@@ -178,3 +194,4 @@ class NavBar extends Component {
 }
 
 export default NavBar;
+
