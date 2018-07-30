@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components } from "@reactioncommerce/reaction-components";
 import { formatPriceString } from "/client/api";
+import TextTruncate from "react-text-truncate";
 
 class ProductGridItems extends Component {
   static propTypes = {
@@ -98,33 +99,38 @@ class ProductGridItems extends Component {
           onDoubleClick={this.handleDoubleClick}
           onClick={this.handleClick}
         >
-          <div className="overlay">
-            <div className="overlay-title">{this.props.product.title}</div>
-            <div className="currency-symbol">{formatPriceString(this.props.displayPrice())}</div>
-            {this.props.isSearch &&
-                <div className="overlay-description">{this.props.product.description}</div>
-            }
+          <div>
+            <div className="overlay">
+              <div id="box">
+                <div className="overlay-title">{this.props.product.title}</div>
+                <div className="currency-symbol">{formatPriceString(this.props.displayPrice())}</div>
+                <TextTruncate line={2} truncateText="…" text={this.props.product.description ? this.props.product.description : "Nothing to show"}
+                  className="description"
+                />
+
+              </div>
+            </div>
           </div>
         </a>
       </div>
     );
   }
-
   renderHoverClassName() {
-    return this.props.isSearch ? "item-content" : "";
+    return  this.props.isSearch ? "item-content" : "";
   }
 
   render() {
     const productItem = (
       <li
-        className={`product-grid-item ${this.renderPinned()} ${this.props.weightClass()} ${this.props.isSelected()}`}
+        className={`product-grid-item product-group-item ${this.renderPinned()} ${this.props.weightClass()} ${this.props.isSelected()}`}
         data-id={this.props.product._id}
         id={this.props.product._id}
       >
-        <div className={this.renderHoverClassName()}>
+        <div className={`product-group-item ${this.renderHoverClassName()}`}>
           <span className="product-grid-item-alerts" />
 
           <a className="product-grid-item-images"
+            id="product-images"
             href={this.props.pdpPath()}
             data-event-category="grid"
             data-event-label="grid product click"
