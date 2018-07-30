@@ -1,7 +1,7 @@
 import React from "react";
+import { Router } from "/client/api";
 import { registerComponent, getHOCs, getRawComponent } from "/imports/plugins/core/components/lib";
 import "../styles/style.css";
-
 
 class MyStoreFront extends getRawComponent("Products") {
   componentDidMount() {
@@ -25,76 +25,205 @@ class MyStoreFront extends getRawComponent("Products") {
   render() {
     return (
       <div>
-        <div className="header my-4">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-8 head1 mb-4">
-                <div className="head1-texts mx-4">
-                  <h2 className="">Always In Style!</h2>
-                  <button className="btn-lg btn-dark mt-3">
-                    SHOP NOW
-                  </button>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="head2">
-                  <div className="shop">
-                    <button className="btn btn-outline-dark" href="#"> SHOP </button>
-                  </div>
-                </div>
-                <div className="head3 mt-3 p-3">
-                  <div className="head3-text ">
-                    <h3>Asgard Mart</h3>
-                    <div className="lead">MONEY BACK GUARANTEE</div>
-                    <a className="" href="#">Discover More > </a>
-                  </div>
+
+        {/* ............carousel START............................ */}
+
+        <div id="myCarousel" className="carousel slide" data-ride="carousel">
+          {/* <!-- Indicators --> */}
+          <ol className="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" className="active" />
+            <li data-target="#myCarousel" data-slide-to="1" />
+            <li data-target="#myCarousel" data-slide-to="2" />
+            <li data-target="#myCarousel" data-slide-to="4" />
+          </ol>
+
+          {/* <!-- Wrapper for slides --> */}
+          <div className="carousel-inner  carousel-style">
+
+            <div className="item item-container container active ">
+              <img className="image-center" src="resources/assets/shoppin.jpeg" alt="" />
+              <div className="carousel-caption">
+                <div className="custom-caption caption-text ">
+                  <h3 className="mb-10"> CLOTHES</h3>
+                  <h5 className="mt-20 mb-20">
+                    <span className="orange-bg">Stay on the edge on fashion trends </span>
+                  </h5>
+                  <a
+                    onClick={e => {
+                      e.preventDefault();
+                      Router.go("/tag/clothes");
+                    }}
+                    className="slider-btn hvr-icon-wobble-horizontal bold shop-now-text"
+                  >
+                    Shop Now
+                    &nbsp;
+                  </a>
                 </div>
               </div>
             </div>
+
+            <div className="item item-container container">
+              <img className="image-center" src="resources/assets/samsung-phones.jpeg" alt="" />
+              <div className="carousel-caption">
+                <div className="custom-caption caption-text ">
+                  <h3 className="mb-10">PHONES</h3>
+                  <h5 className="mt-20 mb-20">
+                    <span className="orange-bg">Get the best Phones</span>
+                  </h5>
+                  <a
+                    onClick={e => {
+                      e.preventDefault();
+                      Router.go("/tag/phones");
+                    }}
+                    className="slider-btn hvr-icon-wobble-horizontal bold shop-now-color"
+                  >
+                    Shop Now &nbsp;
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="item item-container container">
+              <img className="image-center" src="resources/assets/electronics.jpeg" alt="" />
+              <div className="carousel-caption">
+                <div className="custom-caption caption-text">
+                  <h3 className="mb-10">ELECTRONICS</h3>
+                  <h5 className="mt-20 mb-20">
+                    <span className="orange-bg">Never run out of groceries</span>
+                  </h5>
+                  <a
+                    onClick={e => {
+                      e.preventDefault();
+                      Router.go("/tag/electronics");
+                    }}
+                    className="slider-btn hvr-icon-wobble-horizontal bold shop-now-text"
+                  >
+                    Shop Now &nbsp;
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="item item-container container">
+              <img className="image-center" src="resources/assets/pelican-digital-books.jpeg" alt="" />
+              <div className="carousel-caption">
+                <div className="custom-caption caption-text">
+                  <h3 className="mb-10">Books for thoughts</h3>
+                  <h5 className="mt-20 mb-20">
+                    Go
+                    <span className="orange-bg">Find your Digital Books here</span>
+                  </h5>
+                  <a
+                    onClick={e => {
+                      e.preventDefault();
+                      Router.go("/tag/shop");
+                    }}
+                    className="slider-btn hvr-icon-wobble-horizontal bold hop-now-text"
+                  >
+                    Shop Now &nbsp;
+                  </a>
+                </div>
+              </div>
+            </div>
+
+
           </div>
 
+
+          <a className="carousel-control carousel-shade right" href="#myCarousel" data-slide="next">
+            <span className="click-next" > <h1 className="carousel-click">	&rarr; </h1> </span>
+          </a>
+
+          <a className="carousel-control carousel-shade left" href="#myCarousel" data-slide="prev">
+            <span className="click-prev" > <h1 className="carousel-click"> &larr; </h1> </span>
+            {/* <span className="glyphicon glyphicon-chevron-left" /> */}
+          </a>
         </div>
 
         <div id="featured-collections">
           <div className="container ">
             <div className="row">
 
+
+              {/* ............Featured Collections START............................ */}
               <h4 className="">Featured Collections</h4>
               <hr />
             </div>
-            <div className="row products mt-4">
-              <div className="col-sm-3">
-                <img src="resources/assets/watch1.jpeg" alt="" />
-                <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead">Watch</p>
+            <div className="row products mt-4" id="products">
+              <div className="col-sm-3 " id="image-style1">
+                <div className="img-zoom"
+                  onClick={e => {
+                    e.preventDefault();
+                    Router.go("/tag/clothes");
+                  }}
+                >
+                  <img src="resources/assets/watch1.jpeg" alt="" />
+                </div>
+                <div className="featured-caption">
+                  <div className="custom-caption feature-text">
+                    <h3 className="mb-10 text-center shop-now-text">Watches</h3>
+                  </div>
                 </div>
               </div>
-              <div className="col-sm-3">
-                <img src="resources/assets/nikke.jpeg" alt="" />
-                <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead">Shoes</p>
-                </div>
-              </div>
-              <div className="col-sm-3">
-                <img src="resources/assets/tan.jpeg" alt="" />
-                <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead">Bags</p>
-                </div>
-              </div>
-              <div className="col-sm-3">
-                <img src="resources/assets/high.jpeg" alt="" />
-                <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead">Heels</p>
-                </div>
-              </div>
-            </div>
 
+              <div className="col-sm-3 " id="image-style1">
+                <div className="img-zoom"
+                  onClick={e => {
+                    e.preventDefault();
+                    Router.go("/tag/clothes");
+                  }}
+                >
+                  <img src="/resources/assets/tan.jpeg" alt="" />
+                </div>
+                <div className="featured-caption">
+                  <div className="custom-caption feature-text">
+                    <h3 className="mb-10 text-center shop-now-text">Weekender Bags</h3>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-3 " id="image-style1">
+                <div className="img-zoom"
+                  onClick={e => {
+                    e.preventDefault();
+                    Router.go("/tag/clothes");
+                  }}
+                >
+                  <img src="resources/assets/high.jpeg" alt="" />
+                </div>
+                <div className="featured-caption">
+                  <div className="custom-caption feature-text">
+                    <h3 className="mb-10 text-center shop-now-text">Shoes</h3>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-sm-3 " id="image-style1">
+                <div className="img-zoom"
+                  onClick={e => {
+                    e.preventDefault();
+                    Router.go("/tag/clothes");
+                  }}
+                >
+                  <img src="resources/assets/nikke.jpeg" alt="" />
+                </div>
+                <div className="featured-caption">
+                  <div className="custom-caption feature-text">
+                    <h3 className="mb-10 text-center shop-now-text">Shoes</h3>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
 
         <div id="digital-collections" className="my-5">
           <div className="container ">
             <div className="row">
+
+
+              {/* ............digital collections START............................ */}
 
               <h4 className="">Digital Collections</h4>
               <hr />
@@ -103,43 +232,46 @@ class MyStoreFront extends getRawComponent("Products") {
               <div className="col-sm-2">
                 <img src="resources/assets/12-rules.jpg" alt="" />
                 <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead">Self Help</p>
+                  <p className="mt-1 mb-1 lead shop-now-text">Self Help</p>
                 </div>
               </div>
               <div className="col-sm-2">
                 <img src="resources/assets/outsider.jpg" alt="" />
                 <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead">Fiction</p>
+                  <p className="mt-1 mb-1 lead shop-now-text">Fiction</p>
                 </div>
               </div>
               <div className="col-sm-2">
                 <img src="resources/assets/harry.jpg" alt="" />
                 <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead">Novel</p>
+                  <p className="mt-1 mb-1 lead shop-now-text">Novel</p>
                 </div>
               </div>
               <div className="col-sm-2">
                 <img src="resources/assets/uned.jpg" alt="" />
                 <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead">Non Fiction</p>
+                  <p className="mt-1 mb-1 lead shop-now-text">Non Fiction</p>
                 </div>
               </div>
               <div className="col-sm-2">
                 <img src="resources/assets/fuk.jpg" alt="" />
                 <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead">Mystery</p>
+                  <p className="mt-1 mb-1 lead shop-now-text">Mystery</p>
                 </div>
               </div>
               <div className="col-sm-2">
                 <img src="resources/assets/gi.jpg" alt="" />
                 <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead">Auto Biography</p>
+                  <p className="mt-1 mb-1 lead shop-now-text">Auto Biography</p>
                 </div>
               </div>
             </div>
 
           </div>
         </div>
+
+        {/* ............footer START............................ */}
+
 
         <div id="footer">
           <div className="container py-5">

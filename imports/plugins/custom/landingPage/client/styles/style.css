@@ -12,11 +12,11 @@
 
 .header .container {
   margin-top: 22px;
-  min-height: 350px; }
+  min-height: 350px; 
+}
 
 .header .head1 {
   height: 350px;
-  background: url(resources/assets/shoppin.jpeg) center no-repeat;
   background-size: 100%;
   position: relative; }
   .header .head1 .head1-texts {
@@ -31,7 +31,6 @@
   
 .header .head2 {
   height: 200px;
-  background: url(resources/assets/shoe-nike.jpeg) center no-repeat;
   background-size: 100%;
   position: relative; }
   .header .head2 .shop {
@@ -51,7 +50,8 @@
     text-decoration: none; }
 
 #featured-collections {
-  margin-top: 25px; }
+  margin-top: 25px; 
+}
   #featured-collections .products {
     margin-top: 20px; }
     #featured-collections .products .col-sm-3 img {
@@ -89,8 +89,98 @@
     max-height: 20rem;
     width: 30rem;
     overflow: scroll; 
-    } 
-    
-  .btn .caret {
-    margin-left: 8px;
-  }
+      } 
+
+      .carousel-style{
+      max-height: 350px;
+      position: relative;
+      }
+
+      .item-container{
+        height: 350px !important;
+        width: 100% !important;
+      }
+
+      .item img{
+        height: 100% !important;
+        width: 60% !important;
+      }
+
+.level-text{
+  margin-top: 100px;
+}
+
+.img-zoom {
+  position: relative;
+  overflow: hidden !important;
+  min-height: 350px !important; 
+  max-height: 350px !important; 
+}
+
+ .img-zoom:hover img {
+  cursor: pointer;
+  transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+}
+
+.img-zoom img {
+  transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  min-height: 350px !important; 
+  max-height: 350px !important; 
+}
+
+.image-center {
+  margin: auto;
+}
+
+.caption-text{
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  width: 300px;
+  margin: auto;  
+}
+
+.feature-text{
+  border-radius: 4px;
+  width: 150px;
+  margin: auto; 
+  position: relative;
+  padding-top: 0px;
+  bottom: 0;
+}
+
+
+.shop-now-text{
+  color: black ;
+  font-size: 20px;
+  font-family: "Times New Roman", Times, sans-serif;
+}
+
+.shop-now-text{
+  color: #1999dd;
+  font-size: 20px;
+  font-family: "Times New Roman", Times, sans-serif;
+}
+
+.slider-btn:hover{
+  color: white;
+}
+
+.btn .caret {
+  margin-left: 8px;
+}
+
+.carousel-click{
+  margin-top: 150px;
+  font-size: 100px;
+  line-height: 50px;
+  color: #1999dd!important;
+  font-weight: 40px;
+}
+
+.carousel-shade{
+  opacity: 0.3;
+}
