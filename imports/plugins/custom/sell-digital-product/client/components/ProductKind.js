@@ -17,16 +17,37 @@ class ProductKind extends Component {
     };
   }
 
+  componentDidMount() {
+    Meteor.call("fetchDigitalProduct", ReactionProduct.selectedProductId(), (err, result) => {
+      if (result !== "" && result.isDigital === true && Reaction.hasAdminAccess()) {
+        document.querySelector("#productKind").value = "digital";
+        this.handleChange();
+      }
+    });
+  }
+
   componentDidUpdate() {
-    if (this.refs.productUrl && localStorage.getItem(window.location.pathname) !== null) {
-      this.refs.productUrl.value = localStorage.getItem(window.location.pathname);
+    try {
+      Meteor.call("fetchDigitalProduct", ReactionProduct.selectedProductId(),
+        (err, result) => {
+          if (result === "") {
+            this.refs.productUrl.value = "";
+          }
+        });
+    } catch (e) {
+      Logger.info("Error fetching digital product");
     }
   }
+
+  /**
+    *  Handler changes in product type selection.
+    * @param  {object} e event object
+    * @return {undefined}
+    */
 
   handleChange = () => {
     const { productKind } = this.refs;
     const kind = productKind.options[productKind.selectedIndex].value;
-
     const productDetails = {
       uploadSuccess: false,
       productId: ReactionProduct.selectedProductId(),
@@ -35,6 +56,7 @@ class ProductKind extends Component {
     if (kind === "digital") {
       productDetails.isDigital = true;
       this.setState({
+        ...this.state,
         productKind: "digital"
       });
       window.productKind = "digital";
@@ -42,6 +64,7 @@ class ProductKind extends Component {
     if (kind === "physical") {
       productDetails.isDigital = false;
       this.setState({
+        ...this.state,
         productKind: "physical"
       });
       window.productKind = "physical";
@@ -50,6 +73,13 @@ class ProductKind extends Component {
       if (err) {
         Logger.error("Inserting digital product failed");
       }
+    });
+    Meteor.call("fetchDigitalProduct", productDetails.productId, (err, result) => {
+      setTimeout(() => {
+        if (result !== "") {
+          this.refs.productUrl.value = result.productUrl;
+        }
+      }, 200);
     });
   }
 
@@ -70,7 +100,7 @@ class ProductKind extends Component {
           uploadError: false
         });
         const uploadprogress = Math.floor((progress.loaded * 100) / progress.total);
-        this.refs.productUrl.value = `${uploadprogress}`;
+        this.refs.productUrl.value = `${uploadprogress}%`;
       }
     }).then((response) => {
       this.setState({
@@ -110,7 +140,7 @@ class ProductKind extends Component {
     }
     return (
       <div>
-        <select style={{ width: "50%", padding: "0px !important",
+        <select id="productKind" style={{ width: "50%", padding: "0px !important",
           marginBottom: "10px", height: "35px",
           position: "relative", left: "-3px" }} ref="productKind"
                   onChange={this.handleChange} //eslint-disable-line

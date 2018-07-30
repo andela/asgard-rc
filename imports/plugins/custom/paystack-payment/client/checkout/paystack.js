@@ -55,7 +55,7 @@ AutoForm.addHooks("paystack-payment-form", {
       const amount = Math.round(cart.cartTotal()) * 100;
       const template = this.template;
       const key = keys.public;
-      const { testMode } = paymentPackages.settings.paystack;
+      const { testMode } = keys;
       const paymentDetails = {
         key,
         name: formDetails.payerName,

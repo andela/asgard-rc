@@ -13,7 +13,8 @@ Meteor.methods({
     }).settings;
     return {
       public: settings.paystack.apiKey,
-      secret: settings.paystack.secretKey
+      secret: settings.paystack.secretkey,
+      testMode: settings.paystack.testMode
     };
   },
   /**

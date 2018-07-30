@@ -16,7 +16,7 @@ export const DigitalProductSchema = new SimpleSchema({
     type: String,
     optional: true
   },
-  fileUrl: {
+  productUrl: {
     type: String,
     optional: true,
     defaultValue: "0"
