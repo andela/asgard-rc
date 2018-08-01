@@ -6,7 +6,6 @@ import { Reaction } from "/client/api";
 import startTour from "/imports/plugins/custom/vendor-tour/client/vendorTour";
 import startCustomerTour from "/imports/plugins/custom/customer-tour/client/customerTour";
 
-// TODO: Delete this, and do it the react way - Mike M.
 async function openSearchModalLegacy(props) {
   if (Meteor.isClient) {
     const { Blaze } = await import("meteor/blaze");
@@ -105,6 +104,14 @@ class NavBar extends Component {
         <span className="notification">
           <Components.Notification />
         </span>
+      );
+    }
+  }
+
+  renderWallet() {
+    if (this.props.hasProperPermission) {
+      return (
+        <Components.wallet />
       );
     }
   }

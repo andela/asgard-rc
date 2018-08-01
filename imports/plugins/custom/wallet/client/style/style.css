@@ -1,0 +1,59 @@
+.wallet-layout{
+  margin-top: 30px;
+  width: 40%;
+  margin: auto;
+}
+.bottom-gap {
+  margin-bottom: 6rem;
+}
+.left-gap {
+  margin-left: 4rem;
+}
+.transaction-history {
+  width: 60%;
+  margin: auto;
+}
+.blue-text {
+  color: #1999dd;
+}
+.green-text {
+  color: #5cde86;
+}
+#toggleHistory {
+  background-color: #e5ebee;
+  color: rgb(4, 32, 41);
+  border: 1px solid rgb(75, 189, 241);
+}
+#toggleHistory:hover {
+  background-color: #b2d9ee;
+  color: rgb(1, 16, 29);
+}
+.top-gap {
+  margin-top: 2rem;
+}
+#payBtn {
+  color: rgb(23, 44, 53);
+  background-color: rgb(229, 236, 240);
+  padding: 1px 2px;
+}
+.wallet-section {
+  width: 60%;
+  margin: 1rem auto;
+  text-decoration: underline;
+}
+.wallet-pay {
+  background-color: rgb(4, 46, 70);
+  color: white;
+  margin-left: 25%;
+}
+.wallet-pay:hover {
+  background-color: #5cde86;
+}
+.wallet-body {
+  margin-left: 10%;
+}
+.wallet-top {
+  color: rgb(57, 79, 94);
+  margin: 2rem auto;
+  width: 20%;
+}
