@@ -22,10 +22,11 @@ Meteor.methods({
   * @param {String} details - details of the Notification
   * @return {Object} returns result
   */
-  "notification/send": function (userId, type, url, sms, details) {
+  "notification/send": function (userId, type, url, sms, orderId = "null", details) {
     check(userId, String);
     check(type, String);
     check(sms, Boolean);
+    check(orderId, String);
     check(details, Match.OptionalOrNull(String));
     check(url, String);
 
@@ -34,6 +35,7 @@ Meteor.methods({
       orderCanceled: "Your order was canceled.",
       newOrder: "Your order was accepted",
       forAdmin: "You have a new order.",
+      applyForCancel: `${orderId} needs cancellation`,
       orderDelivered: "Your order has been delivered.",
       orderProcessing: "Your order is being processed.",
       orderShipped: "Your order has been shipped."

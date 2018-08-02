@@ -1,3 +1,6 @@
+import { Meteor } from "meteor/meteor";
+import { Packages } from "/lib/collections";
+
 const paystackBaseUrl = "api.paystack.co";
 export const Paystack = {
   verify(referenceNumber, secretKey, callback) {
@@ -17,5 +20,20 @@ export const Paystack = {
           callback(response, null);
         }
       });
+  },
+  accountOptions() {
+    const settings = Packages.findOne({
+      name: "paystack"
+    }).settings;
+    if (!settings.apiKey && !settings.secretkey) {
+      throw new Meteor.Error("403", "Invalid Credentials");
+    }
+    return {
+      public: settings.apiKey,
+      secret: settings.secretkey
+    };
+  },
+  authorize(cardInfo, paymentInfo, callback) {
+    Meteor.call("paystackSubmit", "authorize", cardInfo, paymentInfo, callback);
   }
 };

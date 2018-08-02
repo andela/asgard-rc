@@ -98,6 +98,13 @@ export function filterWorkflowStatus(filter) {
       };
       break;
 
+    // Orders that need refund
+    case "refundRequested":
+      query = {
+        "workflow.status": "coreOrderWorkflow/refundRequested"
+      };
+      break;
+
     case "canceled":
       query = {
         "workflow.status": "coreOrderWorkflow/canceled"

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Meteor } from "meteor/meteor";
+import { Reaction } from "/client/api";
 import PropTypes from "prop-types";
 import CompletedOrder from "../../../checkout/client/components/completedOrder";
 
@@ -14,6 +16,41 @@ class OrdersList extends Component {
     allOrdersInfo: PropTypes.array,
     handleDisplayMedia: PropTypes.func,
     isProfilePage: PropTypes.bool
+  }
+
+  sendNotificationToAdmin = (adminId, orderId) => {
+    const type = "applyForCancel";
+    const prefix = Reaction.getShopPrefix();
+    const url = `${prefix}/dashboard/orders`;
+    const sms = false;
+    // Sending notification to admin
+    return Meteor.call("notification/send", adminId, type, url, sms, orderId, (err, response) => {
+      if (err) {
+        return err;
+      }
+      if (response) {
+        Alerts.toast("Cancel Order request sent", "success", {
+          placement: "productDetail",
+          autoHide: 10000
+        });
+      }
+    });
+  };
+
+  cancelOrder(order) {
+    Meteor.call("shopOwner/getId", (err, response) => {
+      if (err) {
+        return err;
+      }
+      const adminId = response;
+      const orderId = order._id;
+      this.sendNotificationToAdmin(adminId, orderId);
+      Meteor.call("workflow/pushOrderWorkflow", "coreOrderWorkflow", "refundRequested", order, (error) => {
+        if (error) {
+          return error;
+        }
+      });
+    });
   }
 
   render() {
@@ -35,6 +72,7 @@ class OrdersList extends Component {
                 productImages={order.productImages}
                 handleDisplayMedia={handleDisplayMedia}
                 isProfilePage={this.props.isProfilePage}
+                cancelOrder={this.cancelOrder.bind(this)}
               />
             );
           })}
