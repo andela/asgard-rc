@@ -20,7 +20,8 @@
     },
     "TOOL_NODE_FLAGS": {
       "required": true
-    }
+    },
+    "USE_BOOT_PROXY": 1
   },
   "formation": {
     "web": {
@@ -33,7 +34,10 @@
   ],
   "buildpacks": [
     {
-      "url": "https://github.com/swrdfish/meteor-buildpack-horse.git"
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/Zanobo/reaction-buildpack.git"
     }
   ]
 }
