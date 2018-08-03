@@ -41,10 +41,10 @@ class MyStoreFront extends getRawComponent("Products") {
           <div className="carousel-inner  carousel-style">
 
             <div className="item item-container container active ">
-              <img className="image-center" src="resources/assets/shoppin.jpeg" alt="" />
+              <img className="image-center" src="resources/assets/fashion3.jpeg" alt="" />
               <div className="carousel-caption">
                 <div className="custom-caption caption-text ">
-                  <h3 className="mb-10"> CLOTHES</h3>
+                  <h3 className="mb-10">CLOTHES</h3>
                   <h5 className="mt-20 mb-20">
                     <span className="orange-bg">Stay on the edge on fashion trends </span>
                   </h5>
@@ -53,10 +53,9 @@ class MyStoreFront extends getRawComponent("Products") {
                       e.preventDefault();
                       Router.go("/tag/clothes");
                     }}
-                    className="slider-btn hvr-icon-wobble-horizontal bold shop-now-text"
+                    className="slider-btn hvr-icon-wobble-horizontal bold shop-now-color"
                   >
-                    Shop Now
-                    &nbsp;
+                    <button className="carousel-btn1">Shop Now</button>
                   </a>
                 </div>
               </div>
@@ -77,7 +76,7 @@ class MyStoreFront extends getRawComponent("Products") {
                     }}
                     className="slider-btn hvr-icon-wobble-horizontal bold shop-now-color"
                   >
-                    Shop Now &nbsp;
+                    <button className="carousel-btn1">Shop Now</button>
                   </a>
                 </div>
               </div>
@@ -89,16 +88,16 @@ class MyStoreFront extends getRawComponent("Products") {
                 <div className="custom-caption caption-text">
                   <h3 className="mb-10">ELECTRONICS</h3>
                   <h5 className="mt-20 mb-20">
-                    <span className="orange-bg">Never run out of groceries</span>
+                    <span className="orange-bg">Best electronics products</span>
                   </h5>
                   <a
                     onClick={e => {
                       e.preventDefault();
                       Router.go("/tag/electronics");
                     }}
-                    className="slider-btn hvr-icon-wobble-horizontal bold shop-now-text"
+                    className="slider-btn hvr-icon-wobble-horizontal bold shop-now-color"
                   >
-                    Shop Now &nbsp;
+                    <button className="carousel-btn1">Shop Now</button>
                   </a>
                 </div>
               </div>
@@ -118,9 +117,9 @@ class MyStoreFront extends getRawComponent("Products") {
                       e.preventDefault();
                       Router.go("/tag/shop");
                     }}
-                    className="slider-btn hvr-icon-wobble-horizontal bold hop-now-text"
+                    className="slider-btn hvr-icon-wobble-horizontal bold shop-now-color"
                   >
-                    Shop Now &nbsp;
+                    <button className="carousel-btn1">Shop Now</button>
                   </a>
                 </div>
               </div>
@@ -157,11 +156,11 @@ class MyStoreFront extends getRawComponent("Products") {
                     Router.go("/tag/clothes");
                   }}
                 >
-                  <img src="resources/assets/watch1.jpeg" alt="" />
+                  <img src="resources/assets/mens-shoes1.jpeg" alt="" />
                 </div>
                 <div className="featured-caption">
                   <div className="custom-caption feature-text">
-                    <h3 className="mb-10 text-center shop-now-text">Watches</h3>
+                    <h3 className="mb-10 text-center shop-now-text">Shoes</h3>
                   </div>
                 </div>
               </div>
@@ -173,7 +172,7 @@ class MyStoreFront extends getRawComponent("Products") {
                     Router.go("/tag/clothes");
                   }}
                 >
-                  <img src="/resources/assets/tan.jpeg" alt="" />
+                  <img src="/resources/assets/pink-bag.jpeg" alt="" />
                 </div>
                 <div className="featured-caption">
                   <div className="custom-caption feature-text">
@@ -189,11 +188,11 @@ class MyStoreFront extends getRawComponent("Products") {
                     Router.go("/tag/clothes");
                   }}
                 >
-                  <img src="resources/assets/high.jpeg" alt="" />
+                  <img src="resources/assets/groceries.jpeg" alt="" />
                 </div>
                 <div className="featured-caption">
                   <div className="custom-caption feature-text">
-                    <h3 className="mb-10 text-center shop-now-text">Shoes</h3>
+                    <h3 className="mb-10 text-center shop-now-text">Groceries</h3>
                   </div>
                 </div>
               </div>
@@ -202,14 +201,14 @@ class MyStoreFront extends getRawComponent("Products") {
                 <div className="img-zoom"
                   onClick={e => {
                     e.preventDefault();
-                    Router.go("/tag/clothes");
+                    Router.go("/tag/electronics");
                   }}
                 >
-                  <img src="resources/assets/nikke.jpeg" alt="" />
+                  <img src="resources/assets/dome-camera.jpeg" alt="" />
                 </div>
                 <div className="featured-caption">
                   <div className="custom-caption feature-text">
-                    <h3 className="mb-10 text-center shop-now-text">Shoes</h3>
+                    <h3 className="mb-10 text-center shop-now-text">Dome Cameras</h3>
                   </div>
                 </div>
               </div>
@@ -229,38 +228,86 @@ class MyStoreFront extends getRawComponent("Products") {
               <hr />
             </div>
             <div className="row products">
+
               <div className="col-sm-2">
-                <img src="resources/assets/12-rules.jpg" alt="" />
+                <div className="img-zoom-digital"
+                  onClick={e => {
+                    e.preventDefault();
+                    Router.go("/tag/digital");
+                  }}
+                >
+                  <img src="resources/assets/12-rules.jpg" alt="" />
+                </div>
                 <div className="product-details text-center">
                   <p className="mt-1 mb-1 lead shop-now-text">Self Help</p>
                 </div>
               </div>
+
               <div className="col-sm-2">
-                <img src="resources/assets/outsider.jpg" alt="" />
+                <div className="img-zoom-digital"
+                  onClick={e => {
+                    e.preventDefault();
+                    Router.go("/tag/digital");
+                  }}
+                >
+                  <img src="resources/assets/outsider.jpg" alt="" />
+                </div>
                 <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead shop-now-text">Fiction</p>
+                  <p className="mt-1 mb-1 lead shop-now-text">Audio Books</p>
                 </div>
               </div>
+
               <div className="col-sm-2">
-                <img src="resources/assets/harry.jpg" alt="" />
+                <div className="img-zoom-digital"
+                  onClick={e => {
+                    e.preventDefault();
+                    Router.go("/tag/digital");
+                  }}
+                >
+                  <img src="resources/assets/harry.jpg" alt="" />
+                </div>
                 <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead shop-now-text">Novel</p>
+                  <p className="mt-1 mb-1 lead shop-now-text">Fictional Books</p>
                 </div>
               </div>
+
               <div className="col-sm-2">
-                <img src="resources/assets/uned.jpg" alt="" />
+                <div className="img-zoom-digital"
+                  onClick={e => {
+                    e.preventDefault();
+                    Router.go("/tag/digital");
+                  }}
+                >
+                  <img src="resources/assets/uned.jpg" alt="" />
+                </div>
                 <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead shop-now-text">Non Fiction</p>
+                  <p className="mt-1 mb-1 lead shop-now-text">Educational Books</p>
                 </div>
               </div>
+
               <div className="col-sm-2">
-                <img src="resources/assets/fuk.jpg" alt="" />
+                <div className="img-zoom-digital"
+                  onClick={e => {
+                    e.preventDefault();
+                    Router.go("/tag/digital");
+                  }}
+                >
+                  <img src="resources/assets/fuk.jpg" alt="" />
+                </div>
                 <div className="product-details text-center">
-                  <p className="mt-1 mb-1 lead shop-now-text">Mystery</p>
+                  <p className="mt-1 mb-1 lead shop-now-text">Inspirational Books</p>
                 </div>
               </div>
+
               <div className="col-sm-2">
-                <img src="resources/assets/gi.jpg" alt="" />
+                <div className="img-zoom-digital"
+                  onClick={e => {
+                    e.preventDefault();
+                    Router.go("/tag/digital");
+                  }}
+                >
+                  <img src="resources/assets/gi.jpg" alt="" />
+                </div>
                 <div className="product-details text-center">
                   <p className="mt-1 mb-1 lead shop-now-text">Auto Biography</p>
                 </div>

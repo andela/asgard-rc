@@ -159,7 +159,7 @@
   font-family: "Times New Roman", Times, sans-serif;
 }
 
-.shop-now-text{
+.shop-now-color{
   color: #1999dd;
   font-size: 20px;
   font-family: "Times New Roman", Times, sans-serif;
@@ -183,4 +183,37 @@
 
 .carousel-shade{
   opacity: 0.3;
+}
+
+.carousel-btn1:hover{
+  border-radius: 5px;
+  margin: 5px;  
+}
+
+.carousel-btn1{
+  margin: 5px;  
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.img-zoom-digital img {
+  transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  min-height: 200px !important;
+  max-height: 240px !important;
+}
+
+.img-zoom-digital {
+  position: relative;
+  overflow: hidden !important;
+  min-height: 240px !important; 
+  max-height: 240px !important; 
+}
+
+ .img-zoom-digital:hover img {
+  cursor: pointer;
+  transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
 }
