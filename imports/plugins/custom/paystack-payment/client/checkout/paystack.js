@@ -37,6 +37,16 @@ Template.paystackPaymentForm.helpers({
     return PaystackPayment;
   }
 });
+Template.paystackPaymentForm.rendered = function () {
+  $("#paystack-form").hide();
+};
+// toggle payment methods visibility
+Template.paystackPaymentForm.events({
+  "click .toggle-paystack-form": (event) => {
+    event.preventDefault();
+    $("#paystack-form").slideToggle(500);
+  }
+});
 
 AutoForm.addHooks("paystack-payment-form", {
   onSubmit: function (formDetails) {
@@ -44,7 +54,6 @@ AutoForm.addHooks("paystack-payment-form", {
       if (err) {
         throw new Meteor.call.Error("Failed to load keys");
       }
-
       const paymentPackages = Packages.findOne({
         name: "paystack",
         shopId: Reaction.getShopId()
@@ -55,7 +64,6 @@ AutoForm.addHooks("paystack-payment-form", {
       const amount = Math.round(cart.cartTotal()) * 100;
       const template = this.template;
       const key = keys.public;
-      const { testMode } = keys;
       const paymentDetails = {
         key,
         name: formDetails.payerName,
@@ -66,7 +74,7 @@ AutoForm.addHooks("paystack-payment-form", {
           submitting = false;
           const secret = keys.secret;
           const reference = response.reference;
-          if (reference && !testMode) {
+          if (reference) {
             Paystack.verify(reference, secret, (error, res) => {
               if (error) {
                 handlePaystackSubmitError(error);
@@ -94,25 +102,6 @@ AutoForm.addHooks("paystack-payment-form", {
                 Meteor.call("cart/submitPayment", paymentMethod);
               }
             });
-            return;
-          }
-          if (reference && testMode) {
-            const paymentMethod = {
-              processor: "Paystack",
-              storedCard: "Paystack test card",
-              paymentPackageId: paymentPackages._id,
-              paymentSettingsKey: paymentPackages.registry[0].settingsKey,
-              transactionId: reference,
-              method: "credit",
-              status: "passed",
-              mode: "authorize",
-              currency: "NGN",
-              amount,
-              createdAt: new Date(),
-              transactions: []
-            };
-            Alerts.toast("Transaction successful");
-            Meteor.call("cart/submitPayment", paymentMethod);
           }
         },
         onClose() {

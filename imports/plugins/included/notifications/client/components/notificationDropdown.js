@@ -30,7 +30,7 @@ class NotificationDropdown extends Component {
   }
 
   handleClick(notify) {
-    if (notify.type === "forAdmin") {
+    if (notify.type === "forAdmin" || notify.type === "applyForCancel") {
       const actionViewData = Reaction.Apps({
         name: "reaction-orders",
         provides: "dashboard"

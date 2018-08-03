@@ -70,6 +70,8 @@ class OrderTable extends Component {
       return "danger";
     } else if (orderStatus === "coreOrderWorkflow/completed") {
       return "primary";
+    } else if (orderStatus === "coreOrderWorkflow/refundRequested") {
+      return "warning";
     }
 
     return "default";

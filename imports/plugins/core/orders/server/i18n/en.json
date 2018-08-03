@@ -84,6 +84,7 @@
               "coreOrderWorkflow/processing": "Processing ",
               "coreOrderWorkflow/completed": "Completed ",
               "coreOrderWorkflow/canceled": "Canceled ",
+              "coreOrderWorkflow/refundRequested": "Refund Requested ",
               "coreOrderWorkflow/picked": "Picked ",
               "coreOrderWorkflow/packed": "Packed ",
               "coreOrderWorkflow/labeled": "Labeled ",

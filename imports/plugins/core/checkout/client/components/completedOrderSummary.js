@@ -12,7 +12,28 @@ import ShopOrderSummary from "./shopOrderSummary";
  * @property {boolean} isProfilePage - Checks if current page is Profile Page
  * @return {Node} React node containing the order summary broken down by shop
  */
-const CompletedOrderSummary = ({ shops, orderSummary, isProfilePage }) => {
+const CompletedOrderSummary = ({ shops, order, orderSummary, isProfilePage, cancelOrder }) => {
+  let cancelOrderButton = (isProfilePage && order.workflow.status === "new") ? <button onClick={() => {
+    window.$order = order;
+    Alerts.alert(
+      {
+        title: "Are you sure you want to cancel this order?",
+        type: "warning",
+        showCancelButton: true,
+        cancelButtonText: "No",
+        confirmButtonText: "Yes"
+      },
+      confirmed => {
+        if (confirmed) {
+          cancelOrder(order);
+        }
+        return false;
+      }
+    );
+  }} style={{ marginTop: "25px" }} className="btn btn-danger pull-right">Cancel Order</button> : null;
+  if (order.workflow.status === "coreOrderWorkflow/refundRequested" || order.workflow.status === "coreOrderWorkflow/canceled") {
+    cancelOrderButton = <button style={{ marginTop: "25px" }} className="btn btn-danger pull-right" disabled>Canceled Order</button>;
+  }
   return (
     <div>
       <div className="order-details-content-title">
@@ -42,13 +63,16 @@ const CompletedOrderSummary = ({ shops, orderSummary, isProfilePage }) => {
             <Components.Currency amount={orderSummary.total}/>
           </div>
         </div>
+        {cancelOrderButton}
       </div>
     </div>
   );
 };
 
 CompletedOrderSummary.propTypes = {
+  cancelOrder: PropTypes.func,
   isProfilePage: PropTypes.bool,
+  order: PropTypes.object,
   orderSummary: PropTypes.object,
   shops: PropTypes.array
 };

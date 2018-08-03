@@ -45,6 +45,10 @@ export const workflowStatus = [{
 }, {
   label: "Canceled",
   value: "canceled"
+},
+{
+  label: "Refund Requested",
+  value: "refundRequested"
 }];
 
 /**

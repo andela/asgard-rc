@@ -18,7 +18,7 @@ const ThirdPartyAPI = {
         id: Random.id(),
         cardNumber: cardData.number.slice(-4),
         amount: paymentData.total,
-        currency: "USD"
+        currency: "NGN"
       };
       // This is for testing risk evaluation. Proper payment methods have dectection mechanisms for this.
       // This is just a sample
