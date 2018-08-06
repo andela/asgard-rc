@@ -1,0 +1,39 @@
+.push-right {
+  padding-right:10px;
+}
+
+.inner-head {
+  color: #1999dd;
+  font-size: 10px
+}
+
+.grey-back {
+  background-color: hsl(202, 10%, 96%);
+}
+.top-gap {
+  display: block;
+  border: 4px solid rgb(197, 196, 196);
+  padding: 2% 3%;
+  border-radius: 5px;
+  margin: 5% 2% !important
+}
+.bottom-gap {
+  margin-bottom: 5rem;
+}
+.right-gap {
+  margin-right: 3rem;
+}
+.blue-text {
+  color:#1999dd;
+}
+.select-button {
+  padding: 2rem 4rem;
+  background-color: hsl(202, 10%, 96%);
+  color: #1999dd;
+  margin: 1%;
+  font-size: 16px;
+  border-radius: 5px
+}
+.select-button:hover {
+  background-color: white;
+ }

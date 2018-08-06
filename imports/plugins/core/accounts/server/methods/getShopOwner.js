@@ -19,7 +19,7 @@ Meteor.methods({
     const admin = Meteor.users.find().fetch();
     let adminId;
     admin.forEach((element) => {
-      if (element.emails[0].address === adminEmail) {
+      if (element.emails.length > 0 && element.emails[0].address === adminEmail) {
         adminId = element._id;
       }
     });

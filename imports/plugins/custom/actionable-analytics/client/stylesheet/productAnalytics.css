@@ -1,0 +1,35 @@
+.with-nav-tabs.panel-primary .nav-tabs > li > a,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+    color: #fff;
+}
+.with-nav-tabs.panel-primary .nav-tabs > .open > a,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+	color: #fff;
+	background-color: #98afbc;
+	border-color: transparent;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:focus {
+	color: #98afbc;
+	background-color: #fff;
+	border-color: #98afbc;
+	border-bottom-color: transparent;
+}
+.product-width {
+    width: 100%;
+    padding: 3%;
+}
+.all-tabs {
+    border: 3px solid #98afbc !important;
+    border-radius: 4px !important;
+    border-top: 1px solid #e6e6e6 !important;
+    margin-bottom: 0 !important;
+}
+.text-center {
+    text-align: center
+}
